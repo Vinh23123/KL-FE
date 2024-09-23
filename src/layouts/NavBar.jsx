@@ -85,7 +85,12 @@ const NavBar = () => {
         <div className="nav-item">
           <ul>
             <li>
-              <NavLink className="nav-link" to="/home">
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "nav-link active" : "nav-link"
+                }
+                to="/home"
+              >
                 Home
               </NavLink>
             </li>
@@ -98,7 +103,12 @@ const NavBar = () => {
           <div className="grid-item">
             <div className="flex-container">
               <span> {home}</span>
-              <NavLink className="nav-link" to="/rooms">
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "nav-link active" : "nav-link"
+                }
+                to="/rooms"
+              >
                 Rooms
               </NavLink>
             </div>

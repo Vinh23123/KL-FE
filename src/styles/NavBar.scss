@@ -29,4 +29,11 @@ ul {
   &:hover {
     border-bottom: 1px solid $border-base;
   }
+  // &:focus {
+  //   background-color: $button-hover;
+  // }
+
+  &.active {
+    border-bottom: 2px solid $button-hover;
+  }
 }
