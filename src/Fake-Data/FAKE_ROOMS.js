@@ -62,4 +62,67 @@ export const FAKE_ROOMS = [
       },
     ],
   },
+  {
+    RoomID: 4,
+    ReviewID: 4,
+    LocationID: 4,
+    Name: "Mountain King",
+    price: 350.0,
+    Capacity: 10,
+    createdAt: "2023-09-03 11:00:00",
+    updatedAt: "2023-09-03 12:00:00",
+    updatedBy: "admin",
+    images: [
+      {
+        image_id: 7,
+        url: "https://images.pexels.com/photos/19711059/pexels-photo-19711059/free-photo-of-schloss-neuschwanstein.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      },
+      {
+        image_id: 8,
+        url: "https://images.pexels.com/photos/28532673/pexels-photo-28532673/free-photo-of-scenic-view-of-half-dome-in-yosemite-national-park.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      },
+    ],
+  },
+  {
+    RoomID: 5,
+    ReviewID: 5,
+    LocationID: 5,
+    Name: "Mountain King",
+    price: 350.0,
+    Capacity: 3,
+    createdAt: "2023-09-03 11:00:00",
+    updatedAt: "2023-09-03 12:00:00",
+    updatedBy: "admin",
+    images: [
+      {
+        image_id: 9,
+        url: "https://images.pexels.com/photos/19711059/pexels-photo-19711059/free-photo-of-schloss-neuschwanstein.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      },
+      {
+        image_id: 10,
+        url: "https://images.pexels.com/photos/28532673/pexels-photo-28532673/free-photo-of-scenic-view-of-half-dome-in-yosemite-national-park.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      },
+    ],
+  },
+  {
+    RoomID: 6,
+    ReviewID: 6,
+    LocationID: 6,
+    Name: "Mountain King",
+    price: 350.0,
+    Capacity: 13,
+    createdAt: "2023-09-03 11:00:00",
+    updatedAt: "2023-09-03 12:00:00",
+    updatedBy: "admin",
+    images: [
+      {
+        image_id: 11,
+        url: "https://images.pexels.com/photos/19711059/pexels-photo-19711059/free-photo-of-schloss-neuschwanstein.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      },
+      {
+        image_id: 12,
+        url: "https://images.pexels.com/photos/28532673/pexels-photo-28532673/free-photo-of-scenic-view-of-half-dome-in-yosemite-national-park.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      },
+    ],
+  },
 ];

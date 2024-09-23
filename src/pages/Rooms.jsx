@@ -25,7 +25,7 @@ const Rooms = () => {
   return (
     <div>
       {rooms.map((room) => (
-        <Room room={room} key={room.RoomID} />
+        <Room room={room} key={room.room_id} />
       ))}
     </div>
   );
