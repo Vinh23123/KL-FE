@@ -2,34 +2,51 @@ import PropTypes from "prop-types";
 import { formatCurrency } from "../helpers/formatCurrency";
 
 import "../styles/Room.scss";
+import { useEffect, useState } from "react";
 
 const Room = ({ room = {} }) => {
-  // Slick settings for the carousel
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [fade, setFade] = useState(false); // Control fading effect
 
-  // return (
-  //   <div className="room-grid">
-  //     {room.images.map((image) => (
-  //       <div className="room-card" key={image.image_id}>
-  //         <img
-  //           src={image.url}
-  //           alt={`Room ${room.RoomID}`}
-  //           className="room-image"
-  //         />
-  //       </div>
-  //     ))}
-  //   </div>
-  // );
+  const nextSlide = () => {
+    setFade(true);
+    setTimeout(() => {
+      setCurrentIndex((currentIndex + 1) % room.images.length);
+      setFade(false);
+    }, 500); // Match the CSS transition duration
+  };
+
+  const prevSlide = () => {
+    setFade(true);
+    setTimeout(() => {
+      setCurrentIndex(
+        (currentIndex - 1 + room.images.length) % room.images.length
+      );
+      setFade(false);
+    }, 500); // Match the CSS transition duration
+  };
 
   return (
-    <div>
-      {room.images.map((image) => (
-        <img
-          key={image.image_id}
-          src={image.url}
-          alt={`Room ${room.RoomID}`}
-          className="room-image"
-        />
-      ))}
+    <div className="slider-card">
+      <div className="card">
+        <button className="prev" onClick={prevSlide}>
+          ❮
+        </button>
+
+        {/* Display the current image */}
+        <div className={`image-container ${fade ? "fade-out" : "fade-in"}`}>
+          <img
+            key={room.images[currentIndex].image_id}
+            src={room.images[currentIndex].url}
+            alt={`Room ${room.RoomID}`}
+            className="card-image"
+          />
+        </div>
+
+        <button className="next" onClick={nextSlide}>
+          ❯
+        </button>
+      </div>
     </div>
   );
 };

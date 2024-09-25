@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import fetchAllRooms from "../services/roomApi";
 import Spinner from "../components/Spinner";
 import Room from "../pages/Room";
+import "../styles/Rooms.scss";
 
 const Rooms = () => {
   const [rooms, setRooms] = useState([]);
@@ -23,7 +24,7 @@ const Rooms = () => {
   if (isloading) return <Spinner />;
 
   return (
-    <div>
+    <div className="rooms-container">
       {rooms.map((room) => (
         <Room room={room} key={room.room_id} />
       ))}

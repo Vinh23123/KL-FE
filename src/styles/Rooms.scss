@@ -1,0 +1,5 @@
+.rooms-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin-top: 16px;
+}
