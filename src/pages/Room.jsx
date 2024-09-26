@@ -6,44 +6,55 @@ import { useEffect, useState } from "react";
 
 const Room = ({ room = {} }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [fade, setFade] = useState(false); // Control fading effect
+  const imagesToShow = 1; // Control fading effect
 
   const nextSlide = () => {
-    setFade(true);
-    setTimeout(() => {
-      setCurrentIndex((currentIndex + 1) % room.images.length);
-      setFade(false);
-    }, 500); // Match the CSS transition duration
+    setCurrentIndex((currentIndex + 1) % room.images.length);
   };
 
   const prevSlide = () => {
-    setFade(true);
-    setTimeout(() => {
-      setCurrentIndex(
-        (currentIndex - 1 + room.images.length) % room.images.length
-      );
-      setFade(false);
-    }, 500); // Match the CSS transition duration
+    setCurrentIndex(
+      (currentIndex - 1 + room.images.length) % room.images.length
+    );
   };
 
   return (
     <div className="slider-card">
       <div className="card">
-        <button className="prev" onClick={prevSlide}>
+        <button className="btn-arrow  btn-arrow-prev" onClick={prevSlide}>
           ❮
         </button>
 
         {/* Display the current image */}
-        <div className={`image-container ${fade ? "fade-out" : "fade-in"}`}>
-          <img
-            key={room.images[currentIndex].image_id}
-            src={room.images[currentIndex].url}
-            alt={`Room ${room.RoomID}`}
-            className="card-image"
-          />
-        </div>
+        {room.images
+          .slice(currentIndex, currentIndex + imagesToShow)
+          .map((image) => (
+            <div key={image.image_id} className="carousel">
+              <div className="carousel-item">
+                <img
+                  src={image.url}
+                  alt={`Room ${room.RoomID}`}
+                  className="card-image"
+                />
+              </div>
+              <div className="carousel-item-2">
+                <h1>{room.Name}</h1>
+                <div className="price">
+                  <p className="price__original">
+                    Original Price: {formatCurrency(room.price)}
+                  </p>
+                  <p className="price__discount">
+                    Discount Price: {formatCurrency(room.price)} / 1 night
+                  </p>
+                </div>
 
-        <button className="next" onClick={nextSlide}>
+                <p>Capacity: {room.Capacity}</p>
+                <button className="btn btn-position">Details</button>
+              </div>
+            </div>
+          ))}
+
+        <button className="btn-arrow btn-arrow-next" onClick={nextSlide}>
           ❯
         </button>
       </div>

@@ -83,8 +83,9 @@ const NavBar = () => {
     <Fragment>
       <div className="nav-container">
         <div className="nav-item">
-          <ul>
-            <li>
+          <div className="grid-item">
+            <div className="flex-container">
+              <span> {home}</span>
               <NavLink
                 className={({ isActive }) =>
                   isActive ? "nav-link active" : "nav-link"
@@ -93,8 +94,8 @@ const NavBar = () => {
               >
                 Home
               </NavLink>
-            </li>
-          </ul>
+            </div>
+          </div>
         </div>
       </div>
       <hr />

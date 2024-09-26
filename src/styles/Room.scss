@@ -1,3 +1,5 @@
+@import "colors.scss";
+
 .slider-card {
   display: flex;
   justify-content: center;
@@ -7,34 +9,89 @@
   .card {
     position: relative;
     width: 300px; // Width of the card
-    height: 250px; // Height of the card
+    height: 350px; // Height of the card
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     display: flex;
+    flex-direction: row-reverse;
     justify-content: center;
-    align-items: center;
     background-color: white;
 
-    .image-container {
-      width: 90%;
-      height: 90%;
+    .carousel {
+      width: 100%;
+      height: 70%;
       display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: opacity 0.5s ease-in-out; // Smooth fade transition
+      flex-direction: column;
+      transition: transform 0.5s ease-in-out; // Smooth slide transition
 
-      .card-image {
-        width: 100%;
+      .carousel-item {
+        width: 100%; // Each image takes up full card width
         height: 100%;
-        object-fit: cover; // Maintain aspect ratio
-        border-radius: 8px;
-        transition: transform 0.5s ease-in-out;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+          width: 100%;
+          height: 200px; // set the image fixed size,
+          object-fit: cover; // Maintain aspect ratio
+          border-radius: 8px;
+        }
+      }
+
+      .carousel-item-2 {
+        margin: 12px 0 0 12px;
+
+        .price {
+          display: flex;
+          // justify-content: space-around;
+          align-items: center;
+
+          &__original {
+            text-decoration: line-through;
+            font-size: 12px;
+          }
+
+          &__discount {
+            color: red;
+          }
+        }
+
+        .btn {
+          padding: 10px 12px;
+          font-weight: 700;
+          border-radius: 5px;
+          border: 0px;
+          cursor: pointer;
+
+          // note here
+          transition-property: transform;
+          transition-duration: 0.3s;
+          // Specifies an animation
+          // a slow start, then fast, then end slowly
+          transition-timing-function: ease;
+          //  a delay for the start of an animation
+          // 0s before starting the animation
+          transition-delay: 0s;
+        }
+
+        .btn:hover {
+          background-color: $primary-color;
+          transform: translateY(-5px);
+        }
+
+        .btn-position {
+          font-size: 14px;
+
+          float: right;
+          margin-right: 12px;
+        }
       }
     }
 
-    button {
+    .btn-arrow {
       cursor: pointer;
       position: absolute;
       top: 50%;
@@ -53,12 +110,17 @@
       }
     }
 
-    .prev {
+    .btn-arrow-prev {
       left: 5px;
     }
 
-    .next {
+    .btn-arrow-next {
       right: 5px;
     }
+  }
+
+  .card:hover {
+    // background-color: red;
+    // transform: scale(1.1);
   }
 }

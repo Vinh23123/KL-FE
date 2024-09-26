@@ -26,7 +26,7 @@ const Rooms = () => {
   return (
     <div className="rooms-container">
       {rooms.map((room) => (
-        <Room room={room} key={room.room_id} />
+        <Room room={room} key={room.RoomID} />
       ))}
     </div>
   );
