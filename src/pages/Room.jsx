@@ -3,6 +3,7 @@ import { formatCurrency } from "../helpers/formatCurrency";
 
 import "../styles/Room.scss";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const capacity = (
   <svg
@@ -45,6 +46,11 @@ const price = (
 const Room = ({ room = {} }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const imagesToShow = 1; // Control fading effect
+  const navigate = useNavigate();
+
+  const handleDetailsClick = (roomId) => {
+    navigate(`/rooms/${roomId} `);
+  };
 
   const nextSlide = () => {
     setCurrentIndex((currentIndex + 1) % room.images.length);
@@ -95,8 +101,13 @@ const Room = ({ room = {} }) => {
                     <p>{room.Capacity} people</p>
                   </div>
                 </div>
-
-                <button className="btn btn-position">Details</button>
+                {/* push the room id to URL*/}
+                <button
+                  onClick={() => handleDetailsClick(room.RoomID)}
+                  className="btn btn-position"
+                >
+                  Details
+                </button>
               </div>
             </div>
           ))}

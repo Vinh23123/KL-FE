@@ -13,7 +13,7 @@ const Rooms = () => {
     fetchAllRooms().then((res) => {
       if (res.status === 200) {
         res.json().then((rooms) => {
-          console.log(rooms);
+          // console.log(rooms);
           setRooms(rooms);
           setIsLoading(false);
         });

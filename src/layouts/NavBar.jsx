@@ -1,6 +1,8 @@
-import { NavLink } from "react-router-dom";
-import "../styles/NavBar.scss";
+import { NavLink, useParams } from "react-router-dom";
 import { Fragment } from "react";
+
+import Button from "../components/Button";
+import "../styles/NavBar.scss";
 
 const home = (
   <svg
@@ -79,9 +81,10 @@ const cake = (
 );
 
 const NavBar = () => {
+  const { roomID } = useParams();
   return (
     <Fragment>
-      <div className="nav-container">
+      {/* <div className="nav-container">
         <div className="nav-item">
           <div className="grid-item">
             <div className="flex-container">
@@ -98,10 +101,23 @@ const NavBar = () => {
           </div>
         </div>
       </div>
-      <hr />
-      <div className="nav-container">
-        <div className="grid-container">
-          <div className="grid-item">
+      <hr /> */}
+      <div className="nav">
+        <div className="nav__grid-container">
+          <div className="nav__item">
+            <div className="nav__flex-container">
+              <span> {home}</span>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "nav__nav-link active" : "nav-link"
+                }
+                to="/home"
+              >
+                Home
+              </NavLink>
+            </div>
+          </div>
+          {/* <div className="grid-item">
             <div className="flex-container">
               <span> {home}</span>
               <NavLink
@@ -117,7 +133,7 @@ const NavBar = () => {
           <div className="grid-item">
             <div className="flex-container">
               <span> {ticket}</span>
-              <NavLink className="nav-link" to="/home">
+              <NavLink className="nav-link" to={`/rooms/${roomID}`}>
                 Bookings
               </NavLink>
             </div>
@@ -145,9 +161,22 @@ const NavBar = () => {
                 Messages
               </NavLink>
             </div>
+          </div>{" "} */}
+        </div>
+        <div className="nav__content">
+          <div className="nav__flex-content">
+            <div className="nav__content-item">
+              <p className="nav__content-item--size">
+                Your Next Stay, Just a Click Away!
+              </p>
+            </div>
+            <div>
+              <Button>Booking, Now!</Button>
+            </div>
           </div>
         </div>
       </div>
+      <div></div>
     </Fragment>
   );
 };

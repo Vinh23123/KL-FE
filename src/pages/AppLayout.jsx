@@ -3,10 +3,10 @@ import NavBar from "../layouts/NavBar";
 
 const AppLayout = () => {
   return (
-    <dir>
+    <div>
       <NavBar />
       <Outlet />
-    </dir>
+    </div>
   );
 };
 
