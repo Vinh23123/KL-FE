@@ -1,11 +1,11 @@
 import "../styles/Home.scss";
+import Rooms from "./Rooms";
 
 const Home = () => {
   return (
     <>
-      <div className="home-container"></div>
       <div>
-        <h1>Hello</h1>
+        <Rooms />
       </div>
     </>
   );

@@ -1,5 +1,23 @@
+@import "colors.scss";
+
 .btn {
   padding: 1rem 1.5rem;
   letter-spacing: 4px;
   text-transform: uppercase;
+  border: 0px;
+
+  // note here
+  transition-property: transform;
+  transition-duration: 0.3s;
+  // Specifies an animation
+  // a slow start, then fast, then end slowly
+  transition-timing-function: ease;
+  //  a delay for the start of an animation
+  // 0s before starting the animation
+  transition-delay: 0s;
+}
+
+.btn:hover {
+  background-color: $primary-color;
+  transform: translateY(-5px);
 }
