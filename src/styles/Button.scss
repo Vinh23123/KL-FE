@@ -4,8 +4,22 @@
   padding: 1rem 1.5rem;
   letter-spacing: 4px;
   text-transform: uppercase;
-  border: 0px;
+  border: none;
+  border-radius: 1rem;
+  text-align: center;
+  cursor: pointer;
 
+  // box-shadow
+  // box-shadow: offset-x offset-y blur-radius spread-radius color;
+  // first value - offset-x: dịch chuyển sang ngang của bóng đổ
+  // dương bên phải - âm bên trái
+  // second value - offset-y: dịch chuyển dọc
+  // dương xuống dưới - âm lên trên
+  // third value - blur-radius: bán kính làm mở của bóng đổ
+  // giá trị càng lớn - càng mờ
+  // fourth value - spread-radius: bán kính lan rộng của bóng
+  // dương lan rộng - âm thì bóng thu nhỏ
+  box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.7);
   // note here
   transition-property: transform;
   transition-duration: 0.3s;
@@ -15,9 +29,34 @@
   //  a delay for the start of an animation
   // 0s before starting the animation
   transition-delay: 0s;
+
+  &:hover {
+    background-color: $primary-color;
+    transform: translateY(-5px);
+    padding-right: 1.5rem;
+    padding-left: 1rem;
+  }
+  // The ::after pseudo-element can be used to insert some content after the content of an element.
+  &::after {
+    // The content property is used with the ::before and ::after pseudo-elements, to insert generated content.
+    content: "»";
+    position: absolute;
+    opacity: 0;
+    top: 0.8rem;
+    right: 1.2rem;
+    transition: 0.5s;
+  }
+  &:hover:after {
+    opacity: 1;
+    right: 0.7rem;
+  }
 }
 
-.btn:hover {
-  background-color: $primary-color;
-  transform: translateY(-5px);
+.btn {
+  cursor: pointer;
+  // inline-block
+  // the element itself is formatted as an inline element -  apply height and width values
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
 }

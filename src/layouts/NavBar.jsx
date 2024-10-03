@@ -161,7 +161,7 @@ const NavBar = () => {
                 Messages
               </NavLink>
             </div>
-          </div>{" "} */}
+          </div> */}
         </div>
         <div className="nav__content">
           <div className="nav__flex-content">
