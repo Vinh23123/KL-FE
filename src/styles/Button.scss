@@ -46,7 +46,7 @@
     right: 1.2rem;
     transition: 0.5s;
   }
-  &:hover:after {
+  &:hover::after {
     opacity: 1;
     right: 0.7rem;
   }

@@ -70,7 +70,7 @@
           }
         }
 
-        .btn {
+        .btn-room {
           padding: 8px 12px;
           font-weight: 700;
           border-radius: 5px;
@@ -89,7 +89,7 @@
           transition-delay: 0s;
         }
 
-        .btn:hover {
+        .btn-room:hover {
           background-color: $primary-color;
           transform: translateY(-5px);
         }
