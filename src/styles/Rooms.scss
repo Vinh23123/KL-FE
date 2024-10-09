@@ -2,8 +2,8 @@
 
 .rooms-container {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   // margin-top: 16px;
   background-color: $background-color-rooms;
-  height: 100vh;
+  padding-top: 5rem;
 }

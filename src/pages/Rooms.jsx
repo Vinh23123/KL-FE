@@ -24,11 +24,13 @@ const Rooms = () => {
   if (isloading) return <Spinner />;
 
   return (
-    <div className="rooms-container">
-      {rooms.map((room) => (
-        <Room room={room} key={room.RoomID} />
-      ))}
-    </div>
+    <section>
+      <div className="rooms-container">
+        {rooms.map((room) => (
+          <Room room={room} key={room.RoomID} />
+        ))}
+      </div>
+    </section>
   );
 };
 
