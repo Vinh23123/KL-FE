@@ -34,6 +34,7 @@
       padding: 8px 12px;
       border-radius: 20%;
 
+      color: $primary-color;
       border-bottom: 1px solid white;
     }
   }
@@ -49,9 +50,6 @@
     justify-content: center;
     align-items: center;
     gap: 1rem;
-  }
-  &__content-item {
-    // padding: 2rem;
   }
 
   &__content-item--size {

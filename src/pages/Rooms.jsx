@@ -3,7 +3,9 @@ import { useEffect, useState } from "react";
 import fetchAllRooms from "../services/roomApi";
 import Spinner from "../components/Spinner";
 import Room from "../pages/Room";
+
 import "../styles/Rooms.scss";
+import Slider from "./Slider";
 
 const Rooms = () => {
   const [rooms, setRooms] = useState([]);
@@ -28,6 +30,7 @@ const Rooms = () => {
       <div className="rooms-container">
         {rooms.map((room) => (
           <Room room={room} key={room.RoomID} />
+          // <Slider room={room} key={room.RoomID} />
         ))}
       </div>
     </section>

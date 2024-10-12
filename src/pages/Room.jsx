@@ -2,7 +2,8 @@ import "../styles/Room.scss";
 import { formatCurrency } from "../helpers/formatCurrency";
 
 const Room = ({ room = {} }) => {
-  console.log(room.images[0]);
+  const maxSlide = room.images.length;
+  console.log(maxSlide);
 
   return (
     <div className="room">

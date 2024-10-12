@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import AppLayout from "./pages/AppLayout";
 import Rooms from "./pages/Rooms";
 import DetailsRoom from "./pages/DetailsRoom";
+import Slider from "./pages/Slider";
 
 function App() {
   return (
@@ -12,9 +13,10 @@ function App() {
       {/* AppLayout will wrap all these routes */}
       <Route path="/" element={<AppLayout />}>
         <Route path="home" element={<Home />} />
-        <Route path="rooms" element={<Rooms />}>
+        {/* <Route path="rooms" element={<Slider />}>
           <Route path=":roomID" element={<DetailsRoom />} />
-        </Route>
+        </Route> */}
+        <Route path="rooms" element={<Slider />} />
       </Route>
     </Routes>
   );
