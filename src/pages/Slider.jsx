@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import "../styles/Slider.scss";
+import { SketchLogo, Person } from "@phosphor-icons/react";
+import { formatCurrency } from "../helpers/formatCurrency";
 
 const FAKE_ROOM = {
   RoomID: 1,
@@ -28,7 +30,15 @@ const FAKE_ROOM = {
   type: "Luxury",
   room_number: "001",
   status: "available",
-  description: "test1",
+  description: `
+Indulge in the pinnacle of sophistication with our Luxury Suite, where modern design meets timeless elegance. Spanning over 80 square meters, this suite is designed to offer the perfect blend of comfort, privacy, and style, making it an ideal choice for both relaxation and business.
+
+Featuring plush king-sized bedding draped in the finest linens, the room is complemented by a spacious living area with high-end furnishings, a state-of-the-art entertainment system, and floor-to-ceiling windows that provide breathtaking views of the city skyline or the tranquil beach. The elegant marble bathroom boasts a deep soaking tub, a separate rain shower, and deluxe amenities for the ultimate pampering experience.
+
+Enjoy 24-hour concierge service, complimentary high-speed Wi-Fi, and access to our private lounge, where you can unwind with gourmet refreshments and drinks throughout the day.
+
+Whether you’re seeking a romantic getaway or a serene retreat, the Luxury Suite promises an unforgettable stay with all the exclusivity and comfort you deserve.
+`,
   price: 250.0,
   Capacity: 2,
   createdAt: "2023-09-01 10:00:00",
@@ -83,6 +93,16 @@ const Slider = ({ room = {} }) => {
     return { transform: `translateX(${100 * (index - curSlide)}%)` };
   };
 
+  const handleReturnType = (type) => {
+    console.log(type);
+
+    if (type === "Luxury") {
+      return <SketchLogo color="#4dabf7" />;
+    }
+
+    return null;
+  };
+
   // Initializing the slider
   useEffect(() => {
     goToSlide(0);
@@ -103,15 +123,50 @@ const Slider = ({ room = {} }) => {
           {FAKE_ROOM.images?.map((slide, i) => (
             <div key={i} className="slide" style={slideTransform(i)}>
               <img src={slide.url} alt={`Slide ${i}`} />
-              <div className="dots">{createDots()}</div>
             </div>
           ))}
+
+          <div className="dots">{createDots()}</div>
         </div>
       </div>
 
       <div className="room-details__infor">
         <div>
-          <p>test</p>
+          <span className="room-details__hotel-name">
+            {FAKE_ROOM.hotel.hotel_name}
+          </span>
+          <div className="room-details__flex">
+            <p>
+              Room Number:
+              <span>{` ${FAKE_ROOM.room_number}`}</span>
+            </p>
+            <span
+              className={
+                FAKE_ROOM.status === "unavailable"
+                  ? "room-details__room-unavailable"
+                  : `room-details__room-available`
+              }
+            >
+              {FAKE_ROOM.status}
+            </span>
+            <span>{handleReturnType(FAKE_ROOM.type)}</span>
+          </div>
+          <div className="room-details__flex">
+            <p>Capacity {FAKE_ROOM.Capacity}</p>
+            <Person size={32} />
+          </div>
+
+          <p className="room-details__price">
+            {formatCurrency(FAKE_ROOM.price)}
+          </p>
+          <p className="room-details__description room-details__btn--space">
+            {FAKE_ROOM.description}
+          </p>
+          <div>
+            <button className="room-details__btn room-details__btn--space">
+              Booking
+            </button>
+          </div>
         </div>
       </div>
     </div>
