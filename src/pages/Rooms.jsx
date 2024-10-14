@@ -1,15 +1,24 @@
 import { useEffect, useState } from "react";
 
-import fetchAllRooms from "../services/roomApi";
+import { fetchAllRooms, createRoom } from "../services/roomApi";
 import Spinner from "../components/Spinner";
 import Room from "../pages/Room";
 
 import "../styles/Rooms.scss";
-import Slider from "./Slider";
 
 const Rooms = () => {
   const [rooms, setRooms] = useState([]);
   const [isloading, setIsLoading] = useState(true);
+
+  const createRoom = async (roomData) => {
+    try {
+      const res = await createRoom(roomData);
+      console.log("Room created successfully:", res.data);
+      return res.data;
+    } catch (error) {
+      console.error("Failed to create room:", error);
+    }
+  };
 
   useEffect(() => {
     fetchAllRooms().then((res) => {
