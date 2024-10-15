@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { fetchAllRooms as getAllRooms } from "../../services/roomApi";
+import { fetchAllPosts as getAllRooms } from "../../services/roomApi";
 
 // FAKE for testing: 'https://jsonplaceholder.typicode.com/todos'
 // When having api, replace testing api
 export const fetchAllRooms = createAsyncThunk("fetchAllRooms", async () => {
-  const res = await fetch("https://jsonplaceholder.typicode.com/posts");
-  return res.json();
+  const res = await getAllRooms();
+  return res;
 });
 
 const initialState = {

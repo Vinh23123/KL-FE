@@ -11,7 +11,8 @@ const Rooms = () => {
   const [rooms, setRooms] = useState([]);
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
-  console.log("State", state.room.isLoading);
+  // const rooms = useSelector((state) => state.room.data);
+  console.log("State", state);
 
   // const createRoom = async (roomData) => {
   //   try {

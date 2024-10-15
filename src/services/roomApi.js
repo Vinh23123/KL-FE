@@ -16,3 +16,8 @@ export const deleteRoomById = (roomId) => {
 export const fetchAllRooms = () => {
   return apiClient.get("/rooms");
 };
+
+// for testing
+export const fetchAllPosts = () => {
+  return apiClient.get("https://jsonplaceholder.typicode.com/posts");
+};
