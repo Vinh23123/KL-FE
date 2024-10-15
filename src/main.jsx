@@ -1,21 +1,27 @@
 import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
-import "./styles/index.css";
+import { createRoot } from "react-dom/client";
+
 import { BrowserRouter } from "react-router-dom";
 import { IconContext } from "@phosphor-icons/react";
+import { Provider } from "react-redux";
+import { store } from "./redux/store.js";
+
+import "./styles/index.css";
 
 createRoot(document.getElementById("root")).render(
-  <IconContext.Provider
-    value={{
-      size: 32,
-      weight: "light",
-    }}
-  >
-    <StrictMode>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </StrictMode>
-  </IconContext.Provider>
+  <StrictMode>
+    <Provider store={store}>
+      <IconContext.Provider
+        value={{
+          size: 32,
+          weight: "light",
+        }}
+      >
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </IconContext.Provider>
+    </Provider>
+  </StrictMode>
 );

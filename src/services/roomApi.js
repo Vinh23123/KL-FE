@@ -1,15 +1,18 @@
 import { FAKE_ROOMS } from "../Fake-Data/FAKE_ROOMS";
 
-const fetchAllRooms = () => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({
-        status: 200,
-        json: () => Promise.resolve(FAKE_ROOMS),
-      });
-    }, 1000); // Simulating 1-second delay
-  });
-}
+import apiClient from "../services/apiClient";
 
+export const createRoom = (roomData) => {
+  return apiClient.post("/rooms", roomData);
+};
+export const updateRoomById = (roomId, updatedRoomData) => {
+  return apiClient.put(`/rooms/${roomId}`, updatedRoomData);
+};
 
-export default fetchAllRooms
+export const deleteRoomById = (roomId) => {
+  return apiClient.delete(`/rooms/${roomId}`);
+};
+// FAKE for testing: 'https://jsonplaceholder.typicode.com/todos/1
+export const fetchAllRooms = () => {
+  return apiClient.get("/rooms");
+};
