@@ -14,16 +14,6 @@ const Rooms = () => {
   // const rooms = useSelector((state) => state.room.data);
   console.log("State", state);
 
-  // const createRoom = async (roomData) => {
-  //   try {
-  //     const res = await createRoom(roomData);
-  //     console.log("Room created successfully:", res.data);
-  //     return res.data;
-  //   } catch (error) {
-  //     console.error("Failed to create room:", error);
-  //   }
-  // };
-
   useEffect(() => {
     dispatch(fetchAllRooms());
   }, [dispatch]);
