@@ -2,13 +2,13 @@
 
 .nav {
   position: relative; /* Ensure the pseudo-element can cover the container */
-  padding: 24px 36px;
-  font-size: 1rem;
-  color: white;
-  background-image: url("/src/assets/room_image/home2.jpg");
-  height: 100vh;
-  background-repeat: no-repeat;
-  background-size: cover; /* Resize the background image to cover the entire container */
+  padding: 1.2rem 1.4rem;
+  font-size: 1.2rem;
+  border-bottom: 1px solid #ddd;
+
+  &__item {
+    text-align: center;
+  }
 
   &__grid-container {
     display: grid;
@@ -18,26 +18,27 @@
 
   &__flex-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
+    gap: 0.8rem;
   }
 
   &__nav-link {
     text-decoration: none;
-    color: white;
+    color: $color-font;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
     &:hover {
-      border-bottom: 1px solid $border-base;
+      color: $color-font-hover;
     }
 
     &.active {
-      padding: 8px 12px;
-      border-radius: 20%;
-
-      color: $primary-color;
-      border-bottom: 1px solid white;
+      color: $color-font-hover;
+      border-bottom: 4px solid $color-font-hover;
     }
   }
+
   &__content {
     // background-color: blue;
 

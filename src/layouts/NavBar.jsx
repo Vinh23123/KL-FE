@@ -24,115 +24,34 @@ const home = (
 );
 
 const NavBar = () => {
-  const { roomID } = useParams();
   return (
     <Fragment>
-      {/* <div className="nav-container">
-        <div className="nav-item">
-          <div className="grid-item">
-            <div className="flex-container">
-              <span> {home}</span>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "nav-link active" : "nav-link"
-                }
-                to="/home"
-              >
-                Home
-              </NavLink>
-            </div>
-          </div>
-        </div>
-      </div>
-      <hr /> */}
       <div className="nav">
         <div className="nav__grid-container">
           <div className="nav__item">
-            <div className="nav__flex-container">
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "nav__nav-link active" : "nav__nav-link"
+              }
+              to="/home"
+            >
               <span> {home}</span>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "nav__nav-link active" : "nav__nav-link"
-                }
-                to="/home"
-              >
-                Home
-              </NavLink>
-            </div>
+              Home
+            </NavLink>
           </div>
-          <div className="nav__item">
-            <div className="nav__flex-container">
+          <div className="nav__item ">
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "nav__nav-link active" : "nav__nav-link"
+              }
+              to="/rooms"
+            >
               <span> {home}</span>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "nav__nav-link active" : "nav__nav-link"
-                }
-                to="/rooms"
-              >
-                Rooms
-              </NavLink>
-            </div>
-          </div>
-          {/* <div className="grid-item">
-            <div className="flex-container">
-              <span> {home}</span>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "nav-link active" : "nav-link"
-                }
-                to="/rooms"
-              >
-                Rooms
-              </NavLink>
-            </div>
-          </div>
-          <div className="grid-item">
-            <div className="flex-container">
-              <span> {ticket}</span>
-              <NavLink className="nav-link" to={`/rooms/${roomID}`}>
-                Bookings
-              </NavLink>
-            </div>
-          </div>
-          <div className="grid-item">
-            <div className="flex-container">
-              <span> {cake}</span>
-              <NavLink className="nav-link" to="/home">
-                Breakfast
-              </NavLink>
-            </div>
-          </div>
-          <div className="grid-item">
-            <div className="flex-container">
-              <span> {home}</span>
-              <NavLink className="nav-link" to="/home">
-                Desgin
-              </NavLink>
-            </div>
-          </div>
-          <div className="grid-item">
-            <div className="flex-container">
-              <span> {messages}</span>
-              <NavLink className="nav-link" to="/home">
-                Messages
-              </NavLink>
-            </div>
-          </div> */}
-        </div>
-        <div className="nav__content">
-          <div className="nav__flex-content">
-            <div className="nav__content-item">
-              <p className="nav__content-item--size">
-                Your Next Stay, Just a Click Away!
-              </p>
-            </div>
-            <div>
-              <Button>Booking, Now!</Button>
-            </div>
+              <p>Rooms</p>
+            </NavLink>
           </div>
         </div>
       </div>
-      <div></div>
     </Fragment>
   );
 };
