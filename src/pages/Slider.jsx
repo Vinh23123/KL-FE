@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
-import "../styles/Slider.scss";
 import { SketchLogo, Person } from "@phosphor-icons/react";
 import { formatCurrency } from "../helpers/formatCurrency";
+
+import "../styles/Slider.scss";
+import Modal from "../components/Modal";
 
 const FAKE_ROOM = {
   RoomID: 1,
@@ -71,8 +73,16 @@ Whether you’re seeking a romantic getaway or a serene retreat, the Luxury Suit
 const Slider = ({ room = {} }) => {
   const [curSlide, setCurSlide] = useState(0);
   const maxSlide = FAKE_ROOM.images?.length || 0;
-  console.log(maxSlide);
+  // For testig
+  const [isOpen, setIsOpen] = useState(false);
 
+  const handleOpenModal = () => {
+    setIsOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsOpen(false);
+  };
   // Function to create dots
   const createDots = () => {
     return FAKE_ROOM.images.map((_, i) => (
@@ -121,9 +131,11 @@ const Slider = ({ room = {} }) => {
   }, []);
 
   return (
-    <div className="room-details">
-      <div className="slider">
-        {/* <button className="slider__btn slider__btn--left" onClick={prevSilde}>
+    <>
+      {isOpen ? <Modal onCloseModal={handleCloseModal} /> : <> </>}
+      <div className="room-details">
+        <div className="slider">
+          {/* <button className="slider__btn slider__btn--left" onClick={prevSilde}>
           &larr;
         </button>
 
@@ -131,57 +143,62 @@ const Slider = ({ room = {} }) => {
           &rarr;
         </button> */}
 
-        <div className="slides">
-          {FAKE_ROOM.images?.map((slide, i) => (
-            <div key={i} className="slide" style={slideTransform(i)}>
-              <img src={slide.url} alt={`Slide ${i}`} />
-            </div>
-          ))}
+          <div className="slides">
+            {FAKE_ROOM.images?.map((slide, i) => (
+              <div key={i} className="slide" style={slideTransform(i)}>
+                <img src={slide.url} alt={`Slide ${i}`} />
+              </div>
+            ))}
 
-          <div className="dots">{createDots()}</div>
+            <div className="dots">{createDots()}</div>
+          </div>
         </div>
-      </div>
 
-      <div className="room-details__infor">
-        <div>
-          <span className="room-details__hotel-name">
-            {FAKE_ROOM.hotel.hotel_name}
-          </span>
-          <div className="room-details__flex">
-            <p>
-              Room Number:
-              <span>{` ${FAKE_ROOM.room_number}`}</span>
-            </p>
-            <span
-              className={
-                FAKE_ROOM.status === "unavailable"
-                  ? "room-details__room-unavailable"
-                  : `room-details__room-available`
-              }
-            >
-              {FAKE_ROOM.status}
-            </span>
-            <span>{handleReturnType(FAKE_ROOM.type)}</span>
-          </div>
-          <div className="room-details__flex">
-            <p>Capacity {FAKE_ROOM.Capacity}</p>
-            <Person size={32} />
-          </div>
-
-          <p className="room-details__price">
-            {formatCurrency(FAKE_ROOM.price)}
-          </p>
-          <p className="room-details__description room-details__btn--space">
-            {FAKE_ROOM.description}
-          </p>
+        <div className="room-details__infor">
           <div>
-            <button className="room-details__btn room-details__btn--space">
-              Booking
-            </button>
+            <span className="room-details__hotel-name">
+              {FAKE_ROOM.hotel.hotel_name}
+            </span>
+            <div className="room-details__flex">
+              <p>
+                Room Number:
+                <span>{` ${FAKE_ROOM.room_number}`}</span>
+              </p>
+              <span
+                className={
+                  FAKE_ROOM.status === "unavailable"
+                    ? "room-details__room-unavailable"
+                    : `room-details__room-available`
+                }
+              >
+                {FAKE_ROOM.status}
+              </span>
+              <span>{handleReturnType(FAKE_ROOM.type)}</span>
+            </div>
+            <div className="room-details__flex">
+              <p>Capacity {FAKE_ROOM.Capacity}</p>
+              <Person size={32} />
+            </div>
+
+            <p className="room-details__price">
+              {formatCurrency(FAKE_ROOM.price)}
+            </p>
+            <p className="room-details__description room-details__btn--space">
+              {FAKE_ROOM.description}
+            </p>
+            <div>
+              {/* for testing */}
+              <button
+                className="room-details__btn room-details__btn--space"
+                onClick={handleOpenModal}
+              >
+                Booking
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
