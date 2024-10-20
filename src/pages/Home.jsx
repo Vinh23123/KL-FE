@@ -5,9 +5,48 @@ import { TITLE_HOME, FEATURES_HOME } from "../constant/ConstantMessage";
 const Home = () => {
   return (
     <>
+      <section className="section-home">
+        <div className="section-home__description">
+          <h1 className="feature-tilte">Enjoy the journey with us</h1>
+          <p className="section-home__content">
+            Embark on a journey where every moment is an adventure waiting to be
+            discovered. Beyond the destination, it's the small joys—the
+            breathtaking views, the rich cultural experiences, and the stories
+            you gather along the way—that make your trip unforgettable. Let go
+            of the rush, immerse yourself in the journey, and truly experience
+            the beauty of travel. After all, the best memories are made when you
+            slow down and enjoy the ride.
+          </p>
+        </div>
+        <div className="section-home__container">
+          <div className="section-home__img-gallary">
+            <img
+              src="/src/assets/room_image/nature.jpg"
+              alt="Computer"
+              className="section-home__img"
+            />
+            <img
+              src="/src/assets/room_image/nature.jpg"
+              alt="Computer"
+              className="section-home__img"
+            />
+            <img
+              src="/src/assets/room_image/nature.jpg"
+              alt="Computer"
+              className="section-home__img"
+            />
+            <img
+              src="/src/assets/room_image/nature.jpg"
+              alt="Computer"
+              className="section-home__img"
+            />
+          </div>
+        </div>
+      </section>
+
       <section className="section-feature">
         <div className="section-feature__title">
-          <h2 className="section-feature__description">{FEATURES_HOME}</h2>
+          <h2 className="feature-tilte">{FEATURES_HOME}</h2>
           <h3 className="section-feature__header--title">{TITLE_HOME}</h3>
         </div>
         <div className="section-feature__container">
