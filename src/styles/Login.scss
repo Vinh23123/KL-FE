@@ -1,0 +1,49 @@
+.flex {
+  display: flex;
+}
+
+.flex-align-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.grid-two-colums {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.login {
+  position: relative;
+  height: 100vh;
+
+  &__items {
+    box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.212);
+    position: absolute;
+    box-sizing: border-box;
+    padding: 5rem;
+
+    width: 50rem;
+    height: 30rem;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+  }
+
+  &__left-item {
+    border-right: 2px solid black;
+    height: 20rem;
+    width: auto;
+  }
+}

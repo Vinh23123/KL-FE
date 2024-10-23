@@ -1,6 +1,6 @@
 import "../styles/Home.scss";
 import Rooms from "./Rooms";
-import { TITLE_HOME, FEATURES_HOME } from "../constant/ConstantMessage";
+import { STRING } from "../constant/ConstantMessage";
 
 const Home = () => {
   return (
@@ -46,8 +46,10 @@ const Home = () => {
 
       <section className="section-feature">
         <div className="section-feature__title">
-          <h2 className="feature-tilte">{FEATURES_HOME}</h2>
-          <h3 className="section-feature__header--title">{TITLE_HOME}</h3>
+          <h2 className="feature-tilte">{STRING.FEATURES_HOME}</h2>
+          <h3 className="section-feature__header--title">
+            {STRING.TITLE_HOME}
+          </h3>
         </div>
         <div className="section-feature__container">
           <img

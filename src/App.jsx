@@ -3,14 +3,14 @@ import "./App.css";
 
 import Home from "./pages/Home";
 import AppLayout from "./pages/AppLayout";
-import Rooms from "./pages/Rooms";
-import DetailsRoom from "./pages/DetailsRoom";
 import Slider from "./pages/Slider";
+import Login from "./components/Login";
 
 function App() {
   return (
     <Routes>
       {/* AppLayout will wrap all these routes */}
+      <Route path="/login" element={<Login />} />
       <Route path="/" element={<AppLayout />}>
         <Route path="home" element={<Home />} />
         {/* <Route path="rooms" element={<Slider />}>

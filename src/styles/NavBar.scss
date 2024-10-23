@@ -1,11 +1,9 @@
 @import "colors.scss";
 
 .nav {
-  // position: relative;
   padding: 1.2rem 1.4rem;
   font-size: 1.2rem;
   border-bottom: 1px solid #ddd;
-  // z-index: 1;
   &__item {
     text-align: center;
   }

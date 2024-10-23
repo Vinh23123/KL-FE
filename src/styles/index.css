@@ -31,7 +31,7 @@ html {
 
 #root {
   position: relative;
-  z-index: auto;
+  z-index: 0;
 }
 
 /* Check it again */
