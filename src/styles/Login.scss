@@ -10,7 +10,14 @@
     margin-bottom: 12px;
   }
   &__left-item {
-    // background-color: red;
+    // box-shadow: 0 2.4rem 4.8rem rgba(29, 29, 29, 0.356);
+    padding: 1rem;
+    transition: 1s;
+    transition-timing-function: ease-in-out;
+  }
+
+  &__left-item:hover {
+    box-shadow: 0 2.4rem 4.8rem rgba(29, 29, 29, 0.356);
   }
 
   &__signup {
@@ -92,7 +99,7 @@
       border: none;
       background-color: $button-background-base;
       cursor: pointer;
-      transition-duration: 1s;
+      transition-duration: 0.5s;
       transition-timing-function: ease-in-out;
     }
     &__btn:hover {
@@ -157,4 +164,23 @@
 
 .mb-20 {
   margin-bottom: 20px;
+}
+
+.error-message {
+  border: 1px solid $danger-color !important;
+}
+
+.error-message-alert {
+  text-align: start;
+  color: $danger-color;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }

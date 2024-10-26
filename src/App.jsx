@@ -5,12 +5,14 @@ import Home from "./pages/Home";
 import AppLayout from "./pages/AppLayout";
 import Slider from "./pages/Slider";
 import Login from "./components/Login";
+import Signup from "./components/Signup";
 
 function App() {
   return (
     <Routes>
       {/* AppLayout will wrap all these routes */}
       <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
       <Route path="/" element={<AppLayout />}>
         <Route path="home" element={<Home />} />
         {/* <Route path="rooms" element={<Slider />}>
