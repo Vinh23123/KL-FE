@@ -51,10 +51,16 @@
     // border-right: 2px solid black;
     height: 20rem;
     width: auto;
+    margin-right: 2.5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+
+  &__right-item {
+    // background-color: #ff99cc;
+    border-left: 1px solid black;
   }
 
   &__btn {
@@ -132,7 +138,7 @@
     }
 
     &__forgot {
-      margin-right: 2.7rem;
+      margin-right: 1rem;
     }
   }
   // select all input fields inside form
@@ -171,8 +177,9 @@
 }
 
 .error-message-alert {
-  text-align: start;
   color: $danger-color;
+  font-size: 12px;
+  letter-spacing: 0.2px;
 }
 
 .mb-10 {

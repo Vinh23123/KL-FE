@@ -106,7 +106,7 @@ const Login = () => {
               </button>
             </div>
           </div>
-          <div className="text-align-center">
+          <div className="login__right-item text-align-center">
             <h1>Login to your account</h1>
             <p>
               Do you have account, yet ?
@@ -117,7 +117,7 @@ const Login = () => {
             </p>
 
             <form className="login__form" onSubmit={(e) => handleSubmit(e)}>
-              <div className="mb-20 flex">
+              <div className="mb-10 flex">
                 <div className="login__form__items flex-align-center">
                   {/* icon email */}
                   <label htmlFor="email">
@@ -141,7 +141,7 @@ const Login = () => {
                   )}
                 </div>
               </div>
-              <div className="mb-20 flex">
+              <div className="mb-10 flex">
                 <div className="login__form__items flex-align-center ">
                   {/* icon password */}
                   <label htmlFor="password">
