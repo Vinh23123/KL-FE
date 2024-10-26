@@ -3,11 +3,12 @@ $primary-color: #3498db;
 $secondary-color: #2ecc71;
 $room-status-color: #2ecc70a6;
 $text-color: #333333;
-$danger-color: #e74c3c;
+$danger-color: #ee5241;
 
 // button
 $button-base: #bac8ff;
-$button-background-hover: #3498dbe7;
+$button-background-base: #74c0fc;
+$button-background-hover: #3aa1e6e7;
 $button-hover: #748ffc;
 
 // border
@@ -25,3 +26,18 @@ $background-color-footer: #ffe066;
 // navbar
 $color-font: #ced4da;
 $color-font-hover: #495057;
+
+// input
+$background-color-input-focus: #f8f9fa;
+
+//btn google
+$background-color-google: #ff922b;
+$background-color-google-hover: #f76707;
+
+//btn face
+$background-color-face: #4dabf7;
+$background-color-face-hover: #1c7ed6;
+
+//btn twitter
+$background-color-tw: #5c7cfa;
+$background-color-tw-hover: #3b5bdb;

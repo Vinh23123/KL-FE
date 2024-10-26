@@ -1,36 +1,35 @@
-.flex {
-  display: flex;
-}
-
-.flex-align-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.8rem;
-}
-
-.grid-two-colums {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-}
-
-.text-align-center {
-  text-align: center;
-}
-
-.mb-20 {
-  margin-bottom: 20px;
-}
+@import "colors.scss";
 
 .login {
   position: relative;
   height: 100vh;
+  // background-image: linear-gradient(direction, color-stop1, color-stop2, ...);
+  background: linear-gradient(to bottom, #33ccff 0%, #ff99cc 100%);
+
+  h1 {
+    margin-bottom: 12px;
+  }
+  &__left-item {
+    // background-color: red;
+  }
+
+  &__signup {
+    color: blue;
+    padding: 12px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  &__signup:hover {
+    font-size: 14px;
+    text-decoration: underline;
+  }
 
   &__items {
+    background-color: white;
     box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.212);
     position: absolute;
     box-sizing: border-box;
-    padding: 5rem;
+    padding: 3rem;
 
     width: 50rem;
     height: 30rem;
@@ -42,8 +41,120 @@
   }
 
   &__left-item {
-    border-right: 2px solid black;
+    // border-right: 2px solid black;
     height: 20rem;
     width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
+
+  &__btn {
+    width: 200px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    transition-duration: 1s;
+    transition-timing-function: ease-in-out;
+  }
+
+  &__btn--google {
+    background-color: $background-color-google;
+  }
+
+  &__btn--google:hover {
+    background-color: $background-color-google-hover;
+  }
+
+  &__btn--face {
+    background-color: $background-color-face;
+  }
+
+  &__btn--face:hover {
+    background-color: $background-color-face-hover;
+  }
+
+  &__btn--tw {
+    background-color: $background-color-tw;
+  }
+
+  &__btn--tw:hover {
+    background-color: $background-color-tw-hover;
+  }
+
+  &__form {
+    padding: 2rem;
+
+    &__btn {
+      width: 315px;
+      padding: 12px 24px;
+      border: none;
+      background-color: $button-background-base;
+      cursor: pointer;
+      transition-duration: 1s;
+      transition-timing-function: ease-in-out;
+    }
+    &__btn:hover {
+      background-color: $button-background-hover;
+    }
+
+    &__sec {
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    &__items input {
+      width: 16rem;
+      height: 25px;
+      padding: 8px;
+      font-size: 16px;
+      border-radius: 2px;
+      border: 1px solid black;
+      // box-shadow: 0 1.2px 4.8rem rgba(0, 0, 0, 0.212);
+    }
+
+    &__remember {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-left: 3rem;
+    }
+
+    &__forgot {
+      margin-right: 2.7rem;
+    }
+  }
+  // select all input fields inside form
+
+  &__form input:focus {
+    background-color: $background-color-input-focus;
+    border: 1px solid $primary-color;
+    outline: none;
+  }
+}
+
+.flex-align-center {
+  display: flex;
+  // flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  text-align: start;
+}
+
+.grid-two-colums {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
 }
