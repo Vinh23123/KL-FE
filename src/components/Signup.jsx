@@ -81,7 +81,7 @@ const Signup = () => {
               type="text"
               id="email"
               name="email"
-              {...register("email", { required: true, pattern: pattern })}
+              {...register("email", { required: true, pattern: pattern.email })}
             />
           </div>
           <button type="submit">Sign up</button>
