@@ -1,4 +1,4 @@
-import "../styles/Modal.scss";
+import "../styles/_Modal.scss";
 import { useEffect, useRef } from "react";
 
 const Modal = ({ children, onCloseModal }) => {

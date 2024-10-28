@@ -1,4 +1,4 @@
-import "../styles/Button.scss";
+import "../styles/_Button.scss";
 
 const Button = ({ children }) => {
   return (

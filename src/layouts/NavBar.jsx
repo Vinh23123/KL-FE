@@ -2,7 +2,7 @@ import { NavLink, useParams } from "react-router-dom";
 import { Fragment } from "react";
 
 import Button from "../components/Button";
-import "../styles/NavBar.scss";
+import "../styles/_NavBar.scss";
 
 const home = (
   <svg

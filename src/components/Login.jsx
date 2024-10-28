@@ -1,32 +1,26 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
-import "../styles/Login.scss";
+import "../styles/_Login.scss";
 import { Envelope, LockSimple } from "@phosphor-icons/react";
 import { VALIDATOR as pattern } from "../constant/PatternValidate";
-import { useEffect } from "react";
 
 const FAKE_USER = {
-  email: "admin@test.com",
-  password: "123",
+  email: "admin@gmail.com",
+  password: "123456789",
 };
 
 const Login = () => {
-  const navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
     email: "",
     password: "",
     confirmPassword: "",
   });
+  const navigate = useNavigate();
 
   const borderRedEmail = errors.email ? `error-message` : "";
   const borderRedPassword = errors.password ? `error-message` : "";
-
-  const handleNavigateSignUp = () => {
-    console.log("switch to signup");
-    navigate("/signup");
-  };
 
   const handleChange = (e) => {
     console.log(e.target);
@@ -40,7 +34,7 @@ const Login = () => {
 
     if (!data.email.trim()) {
       newErrors.email = "Email is required";
-    } else if (!pattern.email.test(formData.email)) {
+    } else if (pattern.email.test(formData.email)) {
       newErrors.email = "Email is invalid";
     }
 
@@ -63,11 +57,11 @@ const Login = () => {
     const newErrors = validateForm(formData);
     // Object.keys(newErros) return an array of key of the object
     setErrors(newErrors);
-    if (Object.keys(newErrors).length === 0) {
-      if (
-        formData.email === FAKE_USER.email &&
-        formData.password === FAKE_USER.password
-      ) {
+    if (
+      formData.email === FAKE_USER.email &&
+      formData.password === FAKE_USER.password
+    ) {
+      {
         navigate("/home");
         console.log("Form submitted successfully!");
       }
@@ -110,9 +104,9 @@ const Login = () => {
             <h1>Login to your account</h1>
             <p>
               Do you have account, yet ?
-              <a className="login__signup" onClick={handleNavigateSignUp}>
+              <Link className="login__signup" to="/signup">
                 Sign Up
-              </a>
+              </Link>
               here
             </p>
 

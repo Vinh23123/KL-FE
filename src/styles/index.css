@@ -19,6 +19,16 @@
 /* // - Letter spacing
 // -0.5px
 // -0.75px */
+@import "_Footer.scss";
+@import "_Home.scss";
+@import "_Login.scss";
+@import "_NavBar.scss";
+@import "_Room.scss";
+@import "_Rooms.scss";
+@import "_Slider.scss";
+@import "_Spinner.scss";
+@import "_Button.scss";
+
 * {
   padding: 0;
   margin: 0;

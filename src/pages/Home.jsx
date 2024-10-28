@@ -1,4 +1,4 @@
-import "../styles/Home.scss";
+import "../styles/_Home.scss";
 import Rooms from "./Rooms";
 import { STRING } from "../constant/ConstantMessage";
 

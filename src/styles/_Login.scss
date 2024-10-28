@@ -68,7 +68,7 @@
     padding: 12px 24px;
     border: none;
     cursor: pointer;
-    transition-duration: 1s;
+    transition-duration: 0.5s;
     transition-timing-function: ease-in-out;
   }
 
@@ -105,7 +105,7 @@
       border: none;
       background-color: $button-background-base;
       cursor: pointer;
-      transition-duration: 0.5s;
+      transition-duration: 0.3s;
       transition-timing-function: ease-in-out;
     }
     &__btn:hover {

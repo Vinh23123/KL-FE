@@ -1,5 +1,6 @@
-import "../styles/Room.scss";
+import "../styles/_Room.scss";
 import { formatCurrency } from "../helpers/formatCurrency";
+import PropTypes from "prop-types";
 
 const Room = ({ room = {} }) => {
   const maxSlide = room.images.length;
@@ -15,7 +16,6 @@ const Room = ({ room = {} }) => {
             alt="Room Image"
           />
         </div>
-
         <div className="room__content">
           <div className="room__content--1">
             <p>{room.Name}</p>
@@ -31,6 +31,16 @@ const Room = ({ room = {} }) => {
       </div>
     </div>
   );
+};
+
+Room.prototype = {
+  room: PropTypes.shape({
+    images: PropTypes.shape({
+      url: PropTypes.string.isRequired,
+    }).isRequired,
+    price: PropTypes.number.isRequired,
+    Capacity: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 export default Room;

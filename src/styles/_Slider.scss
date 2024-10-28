@@ -8,9 +8,9 @@
   // align-items: center;
   gap: 1rem;
   margin: 2rem;
-  padding: 2rem;
+  padding: 5rem;
   box-shadow: 0 0.6rem 1.5rem rgba(0, 0, 0, 0.118);
-
+  box-sizing: border-box;
   &__infor {
     // background-color: red;
   }
@@ -62,11 +62,13 @@
     cursor: pointer;
     border: none;
     background-color: $primary-color;
+    transition-duration: 0.1s;
+    transition-timing-function: ease-in;
   }
   &__btn:hover {
     background-color: $button-background-hover;
-    outline: 2px solid $button-background-hover;
-    outline-offset: 2px;
+    outline: 4px solid $button-background-hover;
+    outline-offset: 4px;
   }
 
   &__btn--space {

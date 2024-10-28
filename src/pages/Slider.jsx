@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { SketchLogo, Person } from "@phosphor-icons/react";
 import { formatCurrency } from "../helpers/formatCurrency";
 
-import "../styles/Slider.scss";
+import "../styles/_Slider.scss";
 import Modal from "../components/Modal";
+import PropTypes from "prop-types";
 
 const FAKE_ROOM = {
   RoomID: 1,
@@ -70,11 +71,19 @@ Whether you’re seeking a romantic getaway or a serene retreat, the Luxury Suit
   ],
 };
 
-const Slider = ({ room = {} }) => {
+const Slider = () => {
   const [curSlide, setCurSlide] = useState(0);
   const maxSlide = FAKE_ROOM.images?.length || 0;
   // For testig
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurSlide(curSlide < maxSlide - 1 ? curSlide + 1 : 0);
+    }, 7500);
+
+    return () => clearInterval(timer);
+  }, [curSlide, maxSlide]);
 
   const handleOpenModal = () => {
     setIsOpen(true);
@@ -90,7 +99,7 @@ const Slider = ({ room = {} }) => {
         key={i}
         className={`dots__dot ${curSlide === i ? "dots__dot--active" : ""}`} // Fixed typo
         onClick={() => goToSlide(i)}
-        data-slide={i}
+        // data-slide={i}
       ></button>
     ));
   };
@@ -126,9 +135,9 @@ const Slider = ({ room = {} }) => {
   };
 
   // Initializing the slider
-  useEffect(() => {
-    goToSlide(0);
-  }, []);
+  // useEffect(() => {
+  //   goToSlide(0);
+  // }, []);
 
   return (
     <>
@@ -200,6 +209,19 @@ const Slider = ({ room = {} }) => {
       </div>
     </>
   );
+};
+
+Slider.prototype = {
+  room: PropTypes.shape({
+    images: PropTypes.object.isRequired,
+    hotel_name: PropTypes.string.isRequired,
+    room_number: PropTypes.number.isRequired,
+    status: PropTypes.number.isRequired,
+    type: PropTypes.string.isRequired,
+    Capacity: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default Slider;

@@ -10,7 +10,6 @@ import Signup from "./components/Signup";
 function App() {
   return (
     <Routes>
-      {/* AppLayout will wrap all these routes */}
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/" element={<AppLayout />}>
