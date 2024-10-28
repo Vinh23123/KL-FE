@@ -80,10 +80,15 @@ const Slider = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurSlide(curSlide < maxSlide - 1 ? curSlide + 1 : 0);
-    }, 7500);
+    }, 6500);
 
     return () => clearInterval(timer);
   }, [curSlide, maxSlide]);
+
+  // Initializing the slider
+  useEffect(() => {
+    goToSlide(0);
+  }, []);
 
   const handleOpenModal = () => {
     setIsOpen(true);
@@ -133,11 +138,6 @@ const Slider = () => {
 
     return null;
   };
-
-  // Initializing the slider
-  // useEffect(() => {
-  //   goToSlide(0);
-  // }, []);
 
   return (
     <>

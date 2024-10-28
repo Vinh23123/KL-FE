@@ -1,0 +1,26 @@
+.signup {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 30px;
+  text-align: center;
+
+  &__flex-item-left {
+    background-color: #f1f1f1;
+    padding: 10px;
+    flex: 50%;
+  }
+
+  &__flex-item-right {
+    background-color: dodgerblue;
+    padding: 10px;
+    flex: 50%;
+  }
+
+  // Nest the media query inside the .login class
+  @media (max-width: 800px) {
+    &__flex-item-left,
+    &__flex-item-right {
+      flex: 100%;
+    }
+  }
+}
