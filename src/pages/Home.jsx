@@ -51,13 +51,13 @@ const Home = () => {
             {STRING.TITLE_HOME}
           </h3>
         </div>
-        <div className="section-feature__container">
+        <div className="section-feature__container section-feature__feature-animation-1">
           <img
             src="/src/assets/room_image/nature.jpg"
             alt="Computer"
             className="section-feature__img"
           />
-          <div className="section-feature__feature">
+          <div className="section-feature__feature ">
             <div className="section-feature__item">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -85,7 +85,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="section-feature__container">
+        <div className="section-feature__container section-feature__feature-animation-2">
           <div className="section-feature__feature">
             <div className="section-feature__item">
               <svg
@@ -121,7 +121,7 @@ const Home = () => {
           />
         </div>
 
-        <div className="section-feature__container">
+        <div className="section-feature__container section-feature__feature-animation-1">
           <img
             src="/src/assets/room_image/The-quality-page.jpg"
             alt="Computer"

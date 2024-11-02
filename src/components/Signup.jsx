@@ -1,22 +1,36 @@
 import { Form, useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
 
 import "../styles/_Signup.scss";
 import { VALIDATOR as pattern } from "../constant/PatternValidate";
-import FormInput from "./FormInput";
 
 const Signup = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     control,
-  } = useForm();
+    reset,
+  } = useForm({
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      userName: "",
+      phone: "",
+      address: "",
+      password: "",
+    },
+  });
+  const navigate = useNavigate();
+  const onSubmit = async (data) => {
+    // Simulate an async submission process
+    // will repalce by api
 
-  const onSubmit = (data) => {
-    // handle data here
-    console.log(data);
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    navigate("/login");
+    reset();
+    console.log("Form submitted:", data);
   };
-
   const onErrors = (errors) => {
     console.log("Failed validation!", errors);
   };
@@ -24,56 +38,19 @@ const Signup = () => {
   return (
     <div className="signup">
       <div className="signup__flex-item-left">
-        <h1> Sign Up</h1>
-
-        <Form onSubmit={handleSubmit(onSubmit, onErrors)} control={control}>
-          <FormInput label="First Name" error={errors.firstName?.message}>
-            <input
-              type="text"
-              id="firstName"
-              name="firstName"
-              {...register("firstName", {
-                required: "This field is required",
-                minLength: {
-                  value: 5,
-                  message: "First Name should be at least 5 characters",
-                },
-                maxLength: {
-                  value: 20,
-                  message: "First Name should be at max 20 characters",
-                },
-              })}
-              //ARIA (Accessible Rich Internet Applications)
-              aria-invalid={errors.firstName ? "true" : "false"}
-            />
-          </FormInput>
-
-          <FormInput label="Last Name" error={errors.lastName?.message}>
-            <input
-              type="text"
-              id="lastName"
-              name="lastName"
-              {...register("lastName", {
-                required: "This field is required",
-                minLength: {
-                  value: 5,
-                  message: "Last Name should be at least 5 characters",
-                },
-                maxLength: {
-                  value: 20,
-                  message: "Last Name should be at max 20 characters",
-                },
-              })}
-              //ARIA (Accessible Rich Internet Applications)
-              aria-invalid={errors.lastName ? "true" : "false"}
-            />
-          </FormInput>
-
-          <FormInput label="User Name" error={errors.userName?.message}>
+        <Form
+          className="signup__flex-item-left__form"
+          onSubmit={handleSubmit(onSubmit, onErrors)}
+          control={control}
+        >
+          <p>Start your journey with us</p>
+          <h3>Sign Up To Our Service</h3>
+          <div className="signup__flex-item-left__group-items">
             <input
               type="text"
               id="userName"
               name="userName"
+              className="signup__flex-item-left__input"
               {...register("userName", {
                 required: "This field is required",
                 minLength: {
@@ -87,13 +64,22 @@ const Signup = () => {
               })}
               //ARIA (Accessible Rich Internet Applications)
               aria-invalid={errors.userName ? "true" : "false"}
+              placeholder="User Name"
             />
-          </FormInput>
-          <FormInput label="Phone" error={errors.phone?.message}>
+
+            {errors && (
+              <span className="signup__flex-item-left__errors">
+                {errors.userName?.message}
+              </span>
+            )}
+          </div>
+
+          <div className="signup__flex-item-left__group-items">
             <input
               type="text"
               id="phone"
               name="phone"
+              className="signup__flex-item-left__input"
               {...register("phone", {
                 required: "This field is required",
                 minLength: {
@@ -103,13 +89,20 @@ const Signup = () => {
               })}
               //ARIA (Accessible Rich Internet Applications)
               aria-invalid={errors.phone ? "true" : "false"}
+              placeholder="Phone"
             />
-          </FormInput>
-          <FormInput label="Email" error={errors.email?.message}>
+            {errors && (
+              <span className="signup__flex-item-left__errors">
+                {errors.phone?.message}
+              </span>
+            )}
+          </div>
+          <div className="signup__flex-item-left__group-items">
             <input
               type="text"
               id="email"
               name="email"
+              className="signup__flex-item-left__input"
               {...register("email", {
                 required: "This field is required",
                 pattern: {
@@ -118,21 +111,54 @@ const Signup = () => {
                 },
               })}
               aria-invalid={errors.email ? "true" : "false"}
+              placeholder="Email"
             />
-          </FormInput>
-
-          <FormInput label="Address" error={errors.address?.message}>
+            {errors && (
+              <span className="signup__flex-item-left__errors">
+                {errors.email?.message}
+              </span>
+            )}
+          </div>
+          <div className="signup__flex-item-left__group-items">
             <input
-              type="text"
-              id="address"
-              name="address"
-              {...register("address", {
+              type="password"
+              id="password"
+              name="password"
+              className="signup__flex-item-left__input"
+              {...register("password", {
                 required: "This field is required",
+                min: {
+                  value: 8,
+                  message: "Password must be at least 8 characters",
+                },
+                max: {
+                  value: 25,
+                  message: "Password must be maximum at 25 characters",
+                },
+                pattern: {
+                  // Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character
+                  // example pass: Password1@
+                  value: pattern.password,
+                  message: "Password is not valid",
+                },
               })}
-              aria-invalid={errors.address ? "true" : "false"}
+              aria-invalid={errors.password ? "true" : "false"}
+              placeholder="Password"
             />
-          </FormInput>
-          <button type="submit">Sign up</button>
+            {errors && (
+              <span className="signup__flex-item-left__errors">
+                {errors.password?.message}
+              </span>
+            )}
+          </div>
+          {/* <p>Is Dirty: {isDirty ? "Yes" : "No"}</p>
+          <p>Dirty Fields: {JSON.stringify(dirtyFields)}</p> */}
+          <button className="signup__flex-item-left__btn" type="submit">
+            {isSubmitting ? "Signing up ..." : "Sign up"}
+          </button>
+          <p>
+            Have an account? <Link to="/login">Sign In</Link>
+          </p>
         </Form>
       </div>
       <div className="signup__flex-item-right"></div>

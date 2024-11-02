@@ -1,5 +1,7 @@
+import "../styles/_Error.scss";
+
 const Error = ({ children }) => {
-  return children;
+  return <span className="error">{children}</span>;
 };
 
 export default Error;

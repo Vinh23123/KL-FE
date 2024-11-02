@@ -14,18 +14,23 @@ const Modal = ({ children, onCloseModal }) => {
         }
       };
 
-      const handKeyPress = (e) => {
-        console.log(e);
-        if (e.key === "Escape") {
-          onCloseModal();
-        }
-      };
       document.addEventListener("click", handleClickOutSide, true);
-      document.addEventListener("keypress", handKeyPress, true);
       return removeEventListener("click", handleClickOutSide, true);
     },
     [onCloseModal]
   );
+  useEffect(() => {
+    const handKeyPress = (e) => {
+      console.log(e);
+      if (e.key === "q") {
+        onCloseModal();
+      }
+    };
+
+    document.addEventListener("keypress", handKeyPress, true);
+
+    return removeEventListener("keypress", handKeyPress, true);
+  }, [onCloseModal]);
 
   return (
     <div className="modal">

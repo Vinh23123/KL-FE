@@ -59,6 +59,7 @@
 
   border-bottom: 1px solid #ddd;
   transition: transform 1s, opacity 1s;
+  margin-bottom: 1rem;
 
   &__title {
     max-width: 80rem;
@@ -115,6 +116,23 @@
     // width: 2.5rem;
     font-weight: 450;
   }
+
+  &__feature-animation-1 {
+    position: relative;
+    animation-name: leftToCenter;
+    animation-duration: 5s;
+    animation-timing-function: ease-in;
+    animation-delay: -2s;
+    animation-fill-mode: forwards;
+  }
+  &__feature-animation-2 {
+    position: relative;
+    animation-name: RightToCenter;
+    animation-duration: 5s;
+    animation-timing-function: ease-in;
+    animation-delay: -2s;
+    animation-fill-mode: forwards;
+  }
 }
 
 .feature-tilte {
@@ -124,4 +142,23 @@
   margin-bottom: 1rem;
   margin-top: 1rem;
   color: $secondary-color;
+}
+
+@keyframes leftToCenter {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 0%;
+  }
+}
+
+@keyframes RightToCenter {
+  0% {
+    left: 100%;
+    top: 0%;
+  }
+  100% {
+    left: 0%;
+  }
 }
