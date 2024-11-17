@@ -164,3 +164,69 @@
   background-color: #888;
   opacity: 1;
 }
+
+.room-hotel {
+  height: 150px;
+  width: auto;
+  background-color: $background-color-rooms;
+  padding: 1rem;
+  p {
+    margin-top: 12px;
+    letter-spacing: 0.2px;
+  }
+}
+
+.room-users {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100vh;
+  margin: 4rem;
+  &__left-items {
+    padding: 1.5rem;
+    flex: 50%;
+  }
+  &__container {
+    display: flex;
+    gap: 1rem;
+    justify-content: start;
+    align-items: center;
+
+    padding: 1rem;
+  }
+
+  &__rating {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  &__description {
+    background-color: $background-color-rooms;
+    padding: 2rem;
+    h3 {
+      margin-bottom: 8px;
+    }
+  }
+
+  &__right-items {
+    flex: 50%;
+  }
+
+  &__date {
+    font-size: 10px;
+  }
+
+  &__img-user {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  @media (max-width: 800px) {
+    &__left-items,
+    &__right-items {
+      flex: 100%;
+    }
+  }
+}

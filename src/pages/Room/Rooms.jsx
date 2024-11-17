@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // import { fetchAllRooms, createRoom } from "../services/roomApi";
-import Spinner from "../components/Spinner";
-import Room from "../pages/Room";
-import "../styles/_Rooms.scss";
-import { fetchAllRooms } from "../redux/slice/room";
+import Spinner from "../../components/Spinner";
+import Room from "./Room";
+import "../../styles/_Rooms.scss";
+import { fetchAllRooms } from "../../redux/slice/room";
 
 const Rooms = () => {
   const [rooms, setRooms] = useState([]);

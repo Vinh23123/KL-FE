@@ -53,6 +53,7 @@
       background-color: $button-background-base;
       transition: 1s ease-in-out;
       margin-bottom: 1rem;
+      cursor: pointer;
     }
     &__btn:hover {
       background-color: $button-background-hover;

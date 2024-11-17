@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react";
-import { SketchLogo, Person } from "@phosphor-icons/react";
+import { SketchLogo, Person, Star } from "@phosphor-icons/react";
 import { formatCurrency } from "../helpers/formatCurrency";
 
 import "../styles/_Slider.scss";
 import Modal from "../components/Modal";
 import PropTypes from "prop-types";
+import Map from "../components/Map";
+import { getCurrentAddress, useGeolocation } from "../services/useGeolocation";
 
 const FAKE_ROOM = {
   RoomID: 1,
   hotel: {
     hotel_id: 1,
     hotel_name: "Thinh Vuong Hotel",
+    description:
+      "Serene Horizon Hotel offers a perfect blend of luxury and comfort in the heart of the city. Our elegantly designed rooms feature stunning city or sea views, modern amenities, and plush bedding for ultimate relaxation. Enjoy a complimentary breakfast, world-class dining, and unwind with a cocktail at our rooftop bar. Guests can also relax at our spa, outdoor pool, or fitness center. For business travelers, we offer fully equipped meeting rooms and a business center. With our 24/7 concierge service and proximity to top attractions, Serene Horizon Hotel promises an unforgettable stay.",
     location: {
       location_id: 1,
       latitude: 12312,
@@ -71,11 +75,50 @@ Whether you’re seeking a romantic getaway or a serene retreat, the Luxury Suit
   ],
 };
 
+const fakeData = [
+  {
+    id: 1,
+    name: "User 1",
+    rating: 5,
+    title: "Excellent Experience",
+    comment: "Loved the room and the service!",
+    date: "16-07-2002",
+    image:
+      "https://images.pexels.com/photos/28464686/pexels-photo-28464686/free-photo-of-luxurious-villa-bedroom-in-saligao-goa.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  },
+  {
+    id: 2,
+    name: "User 2",
+    rating: 4,
+    title: "Great Stay",
+    comment: "The amenities were perfect!",
+    date: "12-09-2023",
+    image:
+      "https://images.pexels.com/photos/28464686/pexels-photo-28464686/free-photo-of-luxurious-villa-bedroom-in-saligao-goa.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  },
+  {
+    id: 3,
+    name: "User 3",
+    rating: 3,
+    title: "Average",
+    comment: "It was okay, but could be better.",
+    date: "05-05-2023",
+    image:
+      "https://images.pexels.com/photos/28464686/pexels-photo-28464686/free-photo-of-luxurious-villa-bedroom-in-saligao-goa.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  },
+];
+
 const Slider = () => {
   const [curSlide, setCurSlide] = useState(0);
   const maxSlide = FAKE_ROOM.images?.length || 0;
   // For testig
   const [isOpen, setIsOpen] = useState(false);
+
+  // get current location
+  const { isLoading, getPosition, position, error } = useGeolocation();
+  const [mapPosition, setMapPosition] = useState([40, 0]);
+
+  console.log(position);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -89,6 +132,13 @@ const Slider = () => {
   useEffect(() => {
     goToSlide(0);
   }, []);
+
+  useEffect(() => {
+    if (position) {
+      setMapPosition([position.lat, position.long]);
+      getCurrentAddress(position.lat, position.long).then();
+    }
+  }, [position]);
 
   const handleOpenModal = () => {
     setIsOpen(true);
@@ -163,48 +213,91 @@ const Slider = () => {
           </div>
         </div>
 
-        <div className="room-details__infor">
-          <div>
-            <span className="room-details__hotel-name">
-              {FAKE_ROOM.hotel.hotel_name}
+        <div>
+          <span className="room-details__hotel-name">
+            {FAKE_ROOM.hotel.hotel_name}
+          </span>
+          <div className="room-details__flex">
+            <p>
+              Room Number:
+              <span>{` ${FAKE_ROOM.room_number}`}</span>
+            </p>
+            <span
+              className={
+                FAKE_ROOM.status === "unavailable"
+                  ? "room-details__room-unavailable"
+                  : `room-details__room-available`
+              }
+            >
+              {FAKE_ROOM.status}
             </span>
-            <div className="room-details__flex">
-              <p>
-                Room Number:
-                <span>{` ${FAKE_ROOM.room_number}`}</span>
-              </p>
-              <span
-                className={
-                  FAKE_ROOM.status === "unavailable"
-                    ? "room-details__room-unavailable"
-                    : `room-details__room-available`
-                }
-              >
-                {FAKE_ROOM.status}
-              </span>
-              <span>{handleReturnType(FAKE_ROOM.type)}</span>
-            </div>
-            <div className="room-details__flex">
-              <p>Capacity {FAKE_ROOM.Capacity}</p>
-              <Person size={32} />
-            </div>
+            <span>{handleReturnType(FAKE_ROOM.type)}</span>
+          </div>
+          <div className="room-details__flex">
+            <p>Capacity {FAKE_ROOM.Capacity}</p>
+            <Person size={32} />
+          </div>
 
-            <p className="room-details__price">
-              {formatCurrency(FAKE_ROOM.price)}
-            </p>
-            <p className="room-details__description room-details__btn--space">
-              {FAKE_ROOM.description}
-            </p>
-            <div>
-              {/* for testing */}
-              <button
+          <p className="room-details__price">
+            {formatCurrency(FAKE_ROOM.price)}
+          </p>
+          <p className="room-details__description room-details__btn--space">
+            {FAKE_ROOM.description}
+          </p>
+          <div>
+            {/* for testing */}
+            {/* <button
                 className="room-details__btn room-details__btn--space"
                 onClick={handleOpenModal}
               >
                 Booking
-              </button>
-            </div>
+              </button> */}
+
+            <button
+              className="room-details__btn room-details__btn--space"
+              onClick={getPosition}
+            >
+              Booking
+            </button>
           </div>
+        </div>
+      </div>
+      <div className="room-hotel">
+        <h3> {FAKE_ROOM.hotel.hotel_name}</h3>
+        <p>{FAKE_ROOM.hotel.description}</p>
+      </div>
+      <div className="room-users">
+        <div className="room-users__left-items">
+          <h2>Comments</h2>
+          {fakeData.map((user) => (
+            <>
+              <div key={user.id} className="room-users__container">
+                <img
+                  src={user.image}
+                  alt="user-image"
+                  className="room-users__img-user"
+                />
+                <div className="room-users__rating">
+                  <p>
+                    {[...Array(user.rating)].map((_, index) => (
+                      <Star key={index} size="18" color="yellow" />
+                    ))}
+                  </p>
+                  <h3>{user.name}</h3>
+                </div>
+              </div>
+              <div className="room-users__description">
+                <h3>{user.title}</h3>
+                <p>
+                  {user.comment}{" "}
+                  <span className="room-users__date">{user.date}</span>
+                </p>
+              </div>
+            </>
+          ))}
+        </div>
+        <div className="room-users__right-items">
+          <Map position={mapPosition} />
         </div>
       </div>
     </>

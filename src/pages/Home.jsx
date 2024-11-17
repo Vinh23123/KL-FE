@@ -1,6 +1,7 @@
 import "../styles/_Home.scss";
-import Rooms from "./Rooms";
+import Rooms from "./Room/Rooms";
 import { STRING } from "../constant/ConstantMessage";
+import Map from "../components/Map";
 
 const Home = () => {
   return (

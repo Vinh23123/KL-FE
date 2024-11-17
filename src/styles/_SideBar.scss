@@ -1,0 +1,53 @@
+@import "colors.scss";
+
+.side-bar {
+  font-size: 20px;
+  // padding: 3.2rem 2.4rem;
+  // border-right: 1px solid black;
+  background-color: $background-color-side-bar;
+
+  //  grid-column-start : 1; grid-column-end : -1
+  grid-row-start: 1;
+  grid-row-end: -1;
+  // grid-row: 1 / -1;
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+  }
+  &__nav {
+    // background-color: red;
+    color: $font-color;
+    text-decoration: none;
+    padding: 2rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 1rem;
+
+    transition: 1s linear;
+    transition-duration: 0.5s;
+  }
+  &__nav-right-item {
+    // place-self: center stretch;
+    // flex: 50%;
+  }
+  &__nav-left-item {
+    place-self: center;
+    // flex: 50
+  }
+  .side-bar-active {
+    background-color: $background-color-face-hover;
+    border-radius: 2px;
+    color: $font-color-active;
+    box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.075);
+  }
+
+  &__icon {
+  }
+
+  &__side-bar {
+    padding: 1rem;
+  }
+}

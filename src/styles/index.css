@@ -29,7 +29,10 @@
 @import "_Spinner.scss";
 @import "_Button.scss";
 @import "_Signup.scss";
-
+@import "_Map.scss";
+@import "_Dashboard.scss";
+@import "_Header.scss";
+@import "_Dashboard.scss";
 * {
   padding: 0;
   margin: 0;
@@ -48,5 +51,5 @@ html {
 
 /* Check it again */
 body {
-  overflow-x: hidden; /* Hide horizontal scrollbar */
+  /* overflow-x: hidden;  */
 }

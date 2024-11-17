@@ -50,6 +50,28 @@ const NavBar = () => {
               <p>Rooms</p>
             </NavLink>
           </div>
+          <div className="nav__item ">
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "nav__nav-link active" : "nav__nav-link"
+              }
+              to="/booking-history"
+            >
+              <span> {home}</span>
+              <p>Booking History</p>
+            </NavLink>
+          </div>
+          <div className="nav__item ">
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "nav__nav-link active" : "nav__nav-link"
+              }
+              to="/dashboard"
+            >
+              <span> {home}</span>
+              <p>Dashboard</p>
+            </NavLink>
+          </div>
         </div>
       </div>
     </Fragment>

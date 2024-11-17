@@ -1,5 +1,5 @@
-import "../styles/_Room.scss";
-import { formatCurrency } from "../helpers/formatCurrency";
+import "../../styles/_Room.scss";
+import { formatCurrency } from "../../helpers/formatCurrency";
 import PropTypes from "prop-types";
 
 const Room = ({ room = {} }) => {
