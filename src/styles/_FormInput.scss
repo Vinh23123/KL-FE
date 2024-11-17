@@ -1,0 +1,12 @@
+.form-input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
+
+  &__group-item {
+    display: flex;
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,14 @@
+@import "colors.scss";
+
+footer {
+  padding: 2.5rem;
+  background-color: $background-color-footer;
+}
+
+.footer {
+  display: grid;
+  &__company-name {
+    text-align: center;
+    font-size: 0.8rem;
+  }
+}

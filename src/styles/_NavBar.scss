@@ -1,0 +1,62 @@
+@import "colors.scss";
+
+.nav {
+  padding: 1.2rem 1.4rem;
+  font-size: 1.2rem;
+  border-bottom: 1px solid #ddd;
+  &__item {
+    text-align: center;
+  }
+
+  &__grid-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+  }
+
+  &__flex-container {
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem;
+  }
+
+  &__nav-link {
+    text-decoration: none;
+    color: $color-font;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    &:hover {
+      color: $color-font-hover;
+    }
+
+    &.active {
+      color: $color-font-hover;
+      border-bottom: 4px solid $color-font-hover;
+    }
+  }
+
+  &__content {
+    // background-color: blue;
+
+    margin-top: 20rem;
+  }
+
+  &__flex-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__content-item--size {
+    font-size: 64px;
+    letter-spacing: 5px;
+  }
+}
+
+ul {
+  list-style-type: none;
+}
