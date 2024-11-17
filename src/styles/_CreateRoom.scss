@@ -1,0 +1,33 @@
+.create-room {
+  &__form {
+    padding: 2rem;
+    width: 80%;
+  }
+
+  &__form-input {
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid;
+    outline: none;
+  }
+  &__img-reveiw-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    padding: 1rem;
+    // background-color: red;
+    border: 10px solid grey;
+  }
+  &__img-review {
+    width: 100px;
+    height: 100px;
+    border: 1px solid;
+  }
+  &__img-checked {
+    padding: 10px;
+    width: 100px;
+    background: rgb(49, 132, 199);
+    color: white;
+    border-radius: 20px;
+    font-weight: bolder;
+  }
+}

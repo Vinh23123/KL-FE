@@ -1,9 +1,4 @@
-import {
-  CaretLeft,
-  CaretRight,
-  DotsThree,
-  MagnifyingGlass,
-} from "@phosphor-icons/react";
+import { CaretLeft, CaretRight, DotsThree } from "@phosphor-icons/react";
 import "../../styles/_RoomDashboard.scss";
 
 const RoomsDashboard = () => {
