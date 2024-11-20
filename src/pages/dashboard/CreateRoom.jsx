@@ -4,7 +4,7 @@ import ShowRoomImg from "../../components/ShowRoomImg";
 import { useState } from "react";
 
 const CreateRoom = () => {
-  const [imageReview, setImageReview] = useState([]);
+  const [imageReview, setImageReview] = useState();
   const [allImages, setAllImages] = useState([]);
   console.log(allImages);
 
@@ -28,7 +28,7 @@ const CreateRoom = () => {
   const handleClick = async (source) => {
     console.log(source);
     const check = allImages.includes(source);
-    console.log("The boolean value" + check);
+    console.log("The boolean value " + check);
 
     if (check) {
       const id = allImages.indexOf(source);
@@ -44,8 +44,8 @@ const CreateRoom = () => {
 
   return (
     <div className="create-room">
-      <h3>Create Room</h3>
-      <div>
+      <h1>Create Room</h1>
+      <div className="create-room__container">
         <form className="create-room__form" action="">
           <FormRow label="Room Number">
             <input
@@ -70,23 +70,34 @@ const CreateRoom = () => {
               placeholder="Ex: 10"
             />
           </FormRow>
-          <FormRow label="Description">
-            <input
-              className="create-room__form-input"
-              type="text"
-              placeholder="Enter your room number"
-              id="description"
-            />
-          </FormRow>
+
           <FormRow label="Room Status">
             <select className="create-room__form-input" id="status">
               <option value="available">Available</option>
               <option value="unavailable">Un-Available</option>
             </select>
           </FormRow>
-          <FormRow label="Room Images">
-            <input
+          <FormRow label="Description">
+            {/* <input
               className="create-room__form-input"
+              type="text"
+              placeholder="Enter your room number"
+              id="description"
+            /> */}
+            <textarea
+              className="create-room__form-input--padding"
+              name="description"
+              id="description"
+              placeholder="Enter your room description"
+            ></textarea>
+          </FormRow>
+
+          <div>
+            <label className="create-room__label" htmlFor="files">
+              Choose a file
+            </label>
+            <input
+              className="create-room__form-input-type"
               type="file"
               // placeholder="Enter your room number"
               id="files"
@@ -94,24 +105,30 @@ const CreateRoom = () => {
               accept="image/*"
               onChange={handleImageChange}
             />
-          </FormRow>
+          </div>
+          <button type="submit" className="create-room__btn">
+            Submit
+          </button>
         </form>
-        {imageReview && (
+        {imageReview ? (
           <div className="create-room__img-reveiw-container">
+            {/* {allImages && <p>{allImages.length}</p>} */}
             {imageReview.map((img, i) => (
-              <div key={img}>
+              <div className="create-room__img" key={img}>
                 <img
                   className="create-room__img-review"
                   src={img}
                   alt={`Preview ${i + 1}`}
                   onClick={() => handleClick(img)}
                 />
-                {allImages.includes(img) ? (
+                {/* {allImages.includes(img) ? (
                   <div className="create-room__img-checked">Selected</div>
-                ) : null}
+                ) : null} */}
               </div>
             ))}
           </div>
+        ) : (
+          "No Image Review"
         )}
       </div>
     </div>
