@@ -1,0 +1,42 @@
+@import "colors.scss";
+
+.search-form {
+  &__search-wrapper {
+    width: 600px;
+    max-width: 100%;
+    position: relative;
+    margin: 0 0 1rem 0;
+  }
+
+  &__input {
+    background-color: $border-base;
+    border: 2px solid white;
+    border-radius: 50px;
+    padding: 1rem 2rem;
+    width: 100%;
+  }
+
+  &__input::placeholder {
+    text-align: left;
+  }
+  &__input:focus {
+    border: 2px solid $background-color-input-focus;
+    outline: none;
+  }
+
+  &__search-button {
+    cursor: pointer;
+    border-radius: 50%;
+    border: none;
+    height: 80%;
+    aspect-ratio: 1;
+
+    position: absolute;
+    right: 0;
+    transform: translateX(-10%);
+    top: 5px;
+  }
+  &__search-button:hover {
+    color: $border-base;
+  }
+}

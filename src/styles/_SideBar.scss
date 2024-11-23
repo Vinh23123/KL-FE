@@ -15,6 +15,14 @@
     flex-direction: column;
     gap: 2.4rem;
   }
+
+  // side-bar logo container
+  &__logo-container {
+    img {
+      width: 90%;
+    }
+  }
+
   &__nav {
     // background-color: red;
     color: $font-color;

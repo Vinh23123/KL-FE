@@ -86,12 +86,12 @@
 
   &__btn {
     font-size: 18px;
-    padding: 12px 14px;
+    padding: 12px 18px;
     float: right;
     margin: 1.5rem 1rem;
     background-color: $button-background-base;
     outline: none;
-    border: 1px solid;
+    border: none;
     transition-timing-function: ease-in-out;
     transition-duration: 1s;
     transition-delay: -0.5s;

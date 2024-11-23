@@ -1,15 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FormRow from "../../components/FormRow";
 import Map from "../../components/Map";
 import { useGeolocation } from "../../services/useGeolocation";
+import SearchForm from "../../components/SearchForm";
+import Spinner from "../../components/Spinner";
 
 const Setting = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const { isLoading, getPosition, position, error } = useGeolocation();
   const [mapPosition, setMapPosition] = useState([40, 0]);
-  console.log(currentStep);
+  const [isShowSpinner, SetIsShowSpinner] = useState(false);
 
+  useEffect(() => {
+    if (isShowSpinner) {
+      setTimeout(() => {
+        SetIsShowSpinner(false);
+      }, 2000);
+    }
+  }, [isShowSpinner]);
+  // click on button -> true -> isShowSpinner -> false
   const handleNextPage = () => {
+    SetIsShowSpinner((state) => !state);
     setCurrentStep((currentStep) => currentStep + 1);
   };
 
@@ -56,26 +67,34 @@ const Setting = () => {
   const Step2 = () => {
     return (
       <>
-        <Map position={mapPosition} />
-        <button className="create-room__btn" onClick={handlePrePage}>
-          Previous
-        </button>
+        <SearchForm />
+        <Map height="60" position={mapPosition} />
+
         <button className="create-room__btn" type="submit">
           Submit
+        </button>
+        <button className="create-room__btn" onClick={handlePrePage}>
+          Previous
         </button>
       </>
     );
   };
 
   return (
-    <div className="create-room">
-      <div className="create-room__container">
-        <form className="create-room__form" onSubmit={handleSubmitForm}>
-          {currentStep === 1 && <Step1 />}
-          {currentStep === 2 && <Step2 />}
-        </form>
-      </div>
-    </div>
+    <>
+      {isShowSpinner ? (
+        <Spinner />
+      ) : (
+        <div className="create-room">
+          <div className="create-room__container">
+            <form className="create-room__form" onSubmit={handleSubmitForm}>
+              {currentStep === 1 && <Step1 />}
+              {currentStep === 2 && <Step2 />}
+            </form>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

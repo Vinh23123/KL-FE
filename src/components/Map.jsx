@@ -9,9 +9,12 @@ const ChangeCenter = ({ position }) => {
   return null;
 };
 
-const Map = ({ long, lat, position }) => {
+const Map = ({ width = 100, height = 100, long, lat, position }) => {
   return (
-    <div className="map-container">
+    <div
+      className="map-container"
+      style={{ height: `${height}vh`, width: `${width}%` }}
+    >
       <MapContainer
         className="map"
         center={position}
