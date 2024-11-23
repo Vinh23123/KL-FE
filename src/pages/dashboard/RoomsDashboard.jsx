@@ -2,37 +2,46 @@ import {
   CaretLeft,
   CaretRight,
   DotsThree,
-  MagnifyingGlass,
+  Funnel,
+  SortAscending,
+  SortDescending,
 } from "@phosphor-icons/react";
 import "../../styles/_RoomDashboard.scss";
+import SearchForm from "../../components/SearchForm";
+import { useState } from "react";
 
 const RoomsDashboard = () => {
+  const sizeIcon = 40;
   const roomsDashboard = "rooms-dashboard";
+  const [description, setDescription] = useState("");
   const handOpenModal = (e) => {
     console.log("Open Modal");
 
     console.log(e);
   };
+
+  const handleSubmitForm = (e) => {
+    e.preventDefault();
+    console.log("submit form");
+
+    // call api -> return one room math with room number based on hotel id
+  };
+
   return (
     <div className={`${roomsDashboard}`}>
-      <div className="mb-8">
-        <form className={`${roomsDashboard}__search-wrapper`}>
-          <input
-            className={`${roomsDashboard}__input`}
-            type="text"
-            placeholder="Search"
+      <div className={`${roomsDashboard}__function-container mb-8`}>
+        <form onSubmit={handleSubmitForm}>
+          <SearchForm
+            state={description}
+            setState={setDescription}
+            width="600px"
           />
-          <button className={`${roomsDashboard}__search-button`} type="submit">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
-              viewBox="0 0 256 256"
-            >
-              <path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path>
-            </svg>
-          </button>
         </form>
+        <div className={`${roomsDashboard}__function-container__items `}>
+          <Funnel size={sizeIcon} />
+          <SortAscending size={sizeIcon} />
+          <SortDescending size={sizeIcon} />
+        </div>
       </div>
       <div className={`${roomsDashboard}__room-details`}>
         <div className={`${roomsDashboard}__img-container`}>

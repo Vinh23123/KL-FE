@@ -1,7 +1,6 @@
 @import "colors.scss";
 
 .nav {
-  padding: 1.2rem 1.4rem;
   font-size: 1.2rem;
   border-bottom: 1px solid #ddd;
   &__item {
@@ -21,19 +20,21 @@
   }
 
   &__nav-link {
+    padding: 1.2rem 1.4rem;
     text-decoration: none;
     color: $color-font;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.8rem;
+    // background-color: red;
     &:hover {
       color: $color-font-hover;
     }
 
     &.active {
-      color: $color-font-hover;
-      border-bottom: 4px solid $color-font-hover;
+      color: $font-color-active;
+      background-color: $color-font-hover;
     }
   }
 

@@ -1,0 +1,11 @@
+.form-row {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  // box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.466);
+
+  &__label {
+    letter-spacing: 0.4px;
+    margin-bottom: 12px;
+  }
+}

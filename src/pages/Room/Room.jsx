@@ -3,7 +3,7 @@ import { formatCurrency } from "../../helpers/formatCurrency";
 import PropTypes from "prop-types";
 
 const Room = ({ room = {} }) => {
-  const maxSlide = room.images.length;
+  const maxSlide = room?.images?.length;
   console.log(maxSlide);
 
   return (

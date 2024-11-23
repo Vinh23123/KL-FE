@@ -9,7 +9,9 @@ const SideBar = () => {
     <div className="side-bar">
       <ul className="side-bar__container">
         <li>
-          <NavLink className="side-bar-active">Logo</NavLink>
+          <NavLink className="side-bar__logo-container" to="/dashboard/rooms">
+            <img src="/src/assets/room_image/travel-logo2.png" alt="travel" />
+          </NavLink>
         </li>
         <li>
           <NavLink

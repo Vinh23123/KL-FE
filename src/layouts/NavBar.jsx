@@ -1,7 +1,6 @@
 import { NavLink, useParams } from "react-router-dom";
 import { Fragment } from "react";
 
-import Button from "../components/Button";
 import "../styles/_NavBar.scss";
 
 const home = (

@@ -33,6 +33,9 @@
 @import "_Dashboard.scss";
 @import "_Header.scss";
 @import "_Dashboard.scss";
+@import "_CreateRoom.scss";
+@import "_FormRow.scss";
+@import "_SearchForm.scss";
 * {
   padding: 0;
   margin: 0;
