@@ -1,0 +1,30 @@
+@import "colors.scss";
+
+.nav-link-custom {
+  &__item {
+    text-align: center;
+  }
+
+  &__nav-link {
+    padding: 1.2rem 1.4rem;
+    text-decoration: none;
+    color: $color-font;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    // background-color: red;
+    &:hover {
+      color: $color-font-hover;
+    }
+
+    &.active {
+      color: $font-color-active;
+      background-color: $color-font-hover;
+    }
+  }
+}
+
+ul {
+  list-style-type: none;
+}

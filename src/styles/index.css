@@ -36,6 +36,9 @@
 @import "_CreateRoom.scss";
 @import "_FormRow.scss";
 @import "_SearchForm.scss";
+@import "_TextExpander.scss";
+@import "_Link.scss";
+
 * {
   padding: 0;
   margin: 0;

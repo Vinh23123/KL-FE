@@ -1,31 +1,43 @@
 import "../../styles/_Room.scss";
-import { formatCurrency } from "../../helpers/formatCurrency";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
 
 const Room = ({ room = {} }) => {
-  const maxSlide = room?.images?.length;
-  console.log(maxSlide);
+  const navigate = useNavigate();
+
+  const handleClickDetail = (id) => {
+    console.log(room.roomId);
+    navigate(`/rooms/${id}`);
+  };
 
   return (
     <div className="room">
       <div className="room__container">
+        <p hidden>{room.roomId}</p>
         <div className="room__img-container">
           <img
             className="room__img"
-            src={room.images[0].url}
+            src={room?.roomImageDtos[0]?.secureUrl}
             alt="Room Image"
           />
         </div>
         <div className="room__content">
           <div className="room__content--1">
-            <p>{room.Name}</p>
+            <p>
+              <strong>Room Number: </strong> {room.roomNumber}
+            </p>
             <p className="room__price">
-              From {formatCurrency(room.price)} / 1 night
+              From {room?.pricePerNight} VND / 1 night
             </p>
           </div>
           <div className="room__content--1">
-            <p>Capacity: {room.Capacity}</p>
-            <button className="room__btn">Details</button>
+            <p>Capacity: {room.capacity}</p>
+            <button
+              className="room__btn"
+              onClick={() => handleClickDetail(room.roomId)}
+            >
+              Details
+            </button>
           </div>
         </div>
       </div>

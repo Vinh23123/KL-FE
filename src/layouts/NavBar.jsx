@@ -2,6 +2,7 @@ import { NavLink, useParams } from "react-router-dom";
 import { Fragment } from "react";
 
 import "../styles/_NavBar.scss";
+import LinkCustom from "../components/LinkCustom";
 
 const home = (
   <svg
@@ -26,52 +27,24 @@ const NavBar = () => {
   return (
     <Fragment>
       <div className="nav">
-        <div className="nav__grid-container">
-          <div className="nav__item">
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? "nav__nav-link active" : "nav__nav-link"
-              }
-              to="/home"
-            >
-              <span> {home}</span>
-              Home
-            </NavLink>
-          </div>
-          <div className="nav__item ">
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? "nav__nav-link active" : "nav__nav-link"
-              }
-              to="/rooms"
-            >
-              <span> {home}</span>
-              <p>Rooms</p>
-            </NavLink>
-          </div>
-          <div className="nav__item ">
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? "nav__nav-link active" : "nav__nav-link"
-              }
-              to="/booking-history"
-            >
-              <span> {home}</span>
-              <p>Booking History</p>
-            </NavLink>
-          </div>
-          <div className="nav__item ">
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? "nav__nav-link active" : "nav__nav-link"
-              }
-              to="/dashboard"
-            >
-              <span> {home}</span>
-              <p>Dashboard</p>
-            </NavLink>
-          </div>
-        </div>
+        <ul className="nav__grid-container">
+          <LinkCustom href="/home">
+            <span> {home}</span>
+            <p>Rooms</p>
+          </LinkCustom>
+          <LinkCustom href="/rooms">
+            <span> {home}</span>
+            <p>Rooms</p>
+          </LinkCustom>
+          <LinkCustom href="/booking-history">
+            <span> {home}</span>
+            <p>Booking History</p>
+          </LinkCustom>
+          <LinkCustom href="/dashboard">
+            <span> {home}</span>
+            <p>Booking History</p>
+          </LinkCustom>
+        </ul>
       </div>
     </Fragment>
   );

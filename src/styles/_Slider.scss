@@ -5,8 +5,8 @@
   grid-template-columns: repeat(2, 1fr);
 
   gap: 1rem;
-  margin-top: 2rem;
-  padding: 2rem;
+  margin: 2rem;
+  padding: 4rem;
   box-shadow: 0 0.6rem 1.5rem rgba(0, 0, 0, 0.118);
   &__infor {
     // background-color: red;
@@ -74,7 +74,7 @@
 }
 .slider {
   max-width: 50rem;
-  height: 50rem;
+  height: 40rem;
   margin: 0 auto;
 
   position: relative;
@@ -133,8 +133,12 @@
 }
 
 .dots {
+  background-color: $background-color-rooms;
+  padding: 12px;
+  border-radius: 10px;
+
   position: absolute;
-  bottom: 35%;
+  bottom: -10%;
   left: 50%;
   transform: translateX(-50%) translateY(-500%);
   display: flex;
@@ -179,7 +183,7 @@
 .room-users {
   display: flex;
   flex-wrap: wrap;
-  height: 100vh;
+  height: 100%;
   margin: 4rem;
   &__left-items {
     padding: 1.5rem;
@@ -197,7 +201,9 @@
   &__rating {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 1rem;
+
+    margin-top: 1rem;
   }
 
   &__description {
@@ -221,6 +227,59 @@
     height: 50px;
     object-fit: cover;
     border-radius: 50%;
+  }
+  // form-review
+  &__form-review {
+    position: relative;
+    display: inline-block;
+
+    & textarea {
+      padding-right: 20rem;
+    }
+
+    & button {
+      position: absolute;
+      top: 20%;
+      right: 5%;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+      // background-color: red;
+    }
+  }
+
+  &__input {
+    padding: 12px 70px;
+  }
+
+  &__form-btn {
+  }
+
+  // load more button
+
+  &__btn-load-more-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 2rem;
+  }
+
+  &__btn-load-more {
+    font-size: 20px;
+    padding: 12px 2rem;
+    letter-spacing: 2px;
+    border: none;
+    border-radius: 20px;
+    background-color: $primary-color;
+    transition-duration: 0.1s;
+    transition-timing-function: ease-in;
+  }
+
+  &__btn-load-more:hover {
+    background-color: $button-background-hover;
+    outline: 4px solid $button-background-hover;
+    outline-offset: 4px;
   }
 
   @media (max-width: 800px) {

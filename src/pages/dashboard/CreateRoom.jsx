@@ -112,7 +112,6 @@ const CreateRoom = () => {
         </form>
         {imageReview ? (
           <div className="create-room__img-reveiw-container">
-            {/* {allImages && <p>{allImages.length}</p>} */}
             {imageReview.map((img, i) => (
               <div className="create-room__img" key={img}>
                 <img
@@ -121,9 +120,6 @@ const CreateRoom = () => {
                   alt={`Preview ${i + 1}`}
                   onClick={() => handleClick(img)}
                 />
-                {/* {allImages.includes(img) ? (
-                  <div className="create-room__img-checked">Selected</div>
-                ) : null} */}
               </div>
             ))}
           </div>

@@ -1,11 +1,13 @@
 import axios from "axios";
 
-const apiClient = axios.create({
-  baseURL: "http://localhost:8080/api",
+const option = {
+  baseURL: "http://localhost:8081/api/v1",
   headers: {
     "Content-Type": "application/json",
   },
-});
+};
+
+const apiClient = axios.create(option);
 
 apiClient.interceptors.response.use(
   (response) => response, // Successful responses just return as normal

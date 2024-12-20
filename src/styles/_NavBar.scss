@@ -19,42 +19,10 @@
     gap: 0.8rem;
   }
 
-  &__nav-link {
-    padding: 1.2rem 1.4rem;
-    text-decoration: none;
-    color: $color-font;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.8rem;
-    // background-color: red;
-    &:hover {
-      color: $color-font-hover;
-    }
-
-    &.active {
-      color: $font-color-active;
-      background-color: $color-font-hover;
-    }
-  }
-
   &__content {
     // background-color: blue;
 
     margin-top: 20rem;
-  }
-
-  &__flex-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  &__content-item--size {
-    font-size: 64px;
-    letter-spacing: 5px;
   }
 }
 

@@ -3,13 +3,11 @@ import { useEffect, useRef } from "react";
 
 const Modal = ({ children, onCloseModal }) => {
   const ref = useRef();
-  console.log(ref);
 
   useEffect(
     function () {
       const handleClickOutSide = (e) => {
         if (ref.current && !ref.current.contains(e.target)) {
-          console.log("outside", e.target);
           onCloseModal();
         }
       };
@@ -21,7 +19,6 @@ const Modal = ({ children, onCloseModal }) => {
   );
   useEffect(() => {
     const handKeyPress = (e) => {
-      console.log(e);
       if (e.key === "q") {
         onCloseModal();
       }
