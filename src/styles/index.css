@@ -38,6 +38,8 @@
 @import "_SearchForm.scss";
 @import "_TextExpander.scss";
 @import "_Link.scss";
+@import "_BookingHistory.scss";
+@import "_ReservationRoom.scss";
 
 * {
   padding: 0;

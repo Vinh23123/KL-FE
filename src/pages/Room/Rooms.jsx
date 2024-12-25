@@ -40,9 +40,8 @@ const Rooms = () => {
   return (
     <section>
       <div className="rooms-container">
-        {rooms.map((room) => (
+        {rooms?.map((room) => (
           <Room room={room} key={room.roomId} />
-          // <Slider room={room} key={room.RoomID} />
         ))}
         {/* When you nest routes in React Router v6, the child routes will not
         render unless you include <Outlet /> in the parent component. */}

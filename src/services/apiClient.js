@@ -1,13 +1,13 @@
 import axios from "axios";
 
-const option = {
+const options = {
   baseURL: "http://localhost:8081/api/v1",
   headers: {
     "Content-Type": "application/json",
   },
 };
 
-const apiClient = axios.create(option);
+const apiClient = axios.create(options);
 
 apiClient.interceptors.response.use(
   (response) => response, // Successful responses just return as normal
@@ -29,7 +29,7 @@ apiClient.interceptors.response.use(
       // Something else went wrong in setting up the request
       console.error("Error setting up the request:", error.message);
     }
-    return Promise.reject(error); // Always reject the error to handle it further down the chain if needed
+    return Promise.reject(error?.response?.data); // Always reject the error to handle it further down the chain if needed
   }
 );
 

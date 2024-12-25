@@ -45,17 +45,16 @@ const SideBar = () => {
             to="/dashboard/setting"
           >
             <div className="side-bar__nav-left-item">
-              <Gear className="side-bar__icon" size={32} />
+              <Gear size={32} />
             </div>
             <div className="side-bar__nav-right-item">
               <p>Setting</p>
             </div>
           </NavLink>
         </li>
-
         <li>
           <NavLink className={({ isActive }) => onActive(isActive)} to="/home">
-            Back To Home
+            <div>Back To Home</div>
           </NavLink>
         </li>
       </ul>

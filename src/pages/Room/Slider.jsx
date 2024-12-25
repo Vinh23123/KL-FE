@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { PaperPlaneTilt, Person } from "@phosphor-icons/react";
-import { Form, useParams } from "react-router-dom";
+import { Form, useNavigate, useParams } from "react-router-dom";
 
 import "../../styles/_Slider.scss";
 import Modal from "../../components/Modal";
@@ -24,6 +24,7 @@ const Slider = () => {
   const [mapPosition, setMapPosition] = useState({
     latitude: 40,
     longitude: 0,
+    formattedAddress: "",
   });
   const [room, setRoom] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -31,8 +32,11 @@ const Slider = () => {
   const [displayReviews, setDisplayReviews] = useState(initialReviewList);
   const [reviews, setReviews] = useState([]);
   const [isOpenRating, setIsOpenRating] = useState(false);
-  const [rating, setRating] = useState(0);
   const [reviewResponse, setReviewResponse] = useState();
+  const [statusReservation, setStatusReservation] = useState({});
+  const [isOpenRes, setIsOpenRes] = useState(false);
+  const [discounts, setDiscounts] = useState([]);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -51,10 +55,13 @@ const Slider = () => {
 
   useEffect(() => {
     if (room?.hotel?.location) {
+      console.log(room?.hotel);
+
       setMapPosition((prev) => ({
         ...prev,
         latitude: room?.hotel?.location?.latitude,
         longitude: room?.hotel?.location?.longitude,
+        formattedAddress: room?.hotel?.location?.formattedAddress,
       }));
     }
 
@@ -83,11 +90,38 @@ const Slider = () => {
         setIsLoading(false);
       }
     };
-    if (reviewResponse === "SUCCESS") {
-      fetchRoomById;
+    if (
+      reviewResponse === "SUCCESS" ||
+      statusReservation?.status === "SUCCESS"
+    ) {
+      fetchRoomById();
     }
     fetchRoomById();
-  }, [roomId, reviewResponse]);
+  }, [roomId, reviewResponse, statusReservation]);
+
+  useEffect(() => {
+    const fetchAllDiscounts = async () => {
+      try {
+        setIsLoading(true);
+        const response = await apiClient.get(`/discounts`);
+        // console.log(
+        //   "Room Response Data: ",
+        //   JSON.stringify(response.data.data, null, 2)
+        // );
+        setDiscounts(response.data.data);
+        setIsLoading(false);
+      } catch (error) {
+        setError(error);
+        setIsLoading(false);
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    if (isOpen) {
+      fetchAllDiscounts();
+    }
+  }, [isOpen]);
 
   const handleOpenModal = () => {
     setIsOpen(true);
@@ -98,8 +132,17 @@ const Slider = () => {
     setIsOpenRating(false);
   };
 
+  const handleCloseModalRes = () => {
+    setIsOpenRes(false);
+    navigate("/booking-history");
+  };
+
   const handleOpenModalRating = () => {
     setIsOpenRating(true);
+  };
+
+  const handleOpenModalRes = () => {
+    setIsOpenRes(true);
   };
 
   const loadMore = () => {
@@ -107,10 +150,6 @@ const Slider = () => {
   };
 
   const handleSubmitFormReview = async (data) => {
-    // e.preventDefault();
-
-    console.log(data);
-
     try {
       setIsLoading(true);
       const response = await apiClient.post(`/rooms/${roomId}/reviews`, {
@@ -118,10 +157,10 @@ const Slider = () => {
         title: "Test 124",
         comment: data.comment,
       });
-      console.log(
-        "Review Response Data: ",
-        JSON.stringify(response.data, null, 2)
-      );
+      // console.log(
+      //   "Review Response Data: ",
+      //   JSON.stringify(response.data, null, 2)
+      // );
       setReviewResponse(response.data.status);
       setIsOpenRating(false);
       setIsLoading(false);
@@ -158,9 +197,22 @@ const Slider = () => {
 
   return (
     <>
+      {isOpenRes ? (
+        <Modal onCloseModal={handleCloseModalRes}>
+          {statusReservation?.status}
+        </Modal>
+      ) : (
+        <></>
+      )}
       {isOpen ? (
         <Modal onCloseModal={handleCloseModal}>
-          <CreatedReservation />
+          <CreatedReservation
+            roomId={roomId}
+            onOpenModalRes={handleOpenModalRes}
+            onCloseModal={handleCloseModal}
+            onResponse={setStatusReservation}
+            discounts={discounts}
+          />
         </Modal>
       ) : (
         <> </>
@@ -226,12 +278,16 @@ const Slider = () => {
             {room?.description}
           </p>
           <div>
-            <button
-              onClick={handleOpenModal}
-              className="room-details__btn room-details__btn--space"
-            >
-              Booking
-            </button>
+            {room?.status === "AVAILABLE" ? (
+              <button
+                onClick={handleOpenModal}
+                className="room-details__btn room-details__btn--space"
+              >
+                Booking
+              </button>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </div>
@@ -317,7 +373,7 @@ const Slider = () => {
           </>
         </div>
         <div className="room-users__right-items">
-          {/* <MapComponent height="900px" position={mapPosition} /> */}
+          <MapComponent height="900px" position={mapPosition} />
         </div>
       </div>
     </>

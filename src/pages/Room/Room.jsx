@@ -2,6 +2,8 @@ import "../../styles/_Room.scss";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 
+import { formatCurrency } from "../../helpers/formatCurrency";
+
 const Room = ({ room = {} }) => {
   const navigate = useNavigate();
 
@@ -27,7 +29,7 @@ const Room = ({ room = {} }) => {
               <strong>Room Number: </strong> {room.roomNumber}
             </p>
             <p className="room__price">
-              From {room?.pricePerNight} VND / 1 night
+              From {formatCurrency(room?.pricePerNight)} / 1 night
             </p>
           </div>
           <div className="room__content--1">

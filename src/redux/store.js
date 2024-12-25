@@ -1,12 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import roomSlice from "../redux/slice/room";
+import hotelReducer from "../redux/slice/hotelSlice"; // Adjust the import according to your file structure
 
 export const store = configureStore({
-  reducer: { room: roomSlice },
+  reducer: { hotel: hotelReducer },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      // detects non-serializable values
-      // doc: https://redux-toolkit.js.org/usage/usage-guide#working-with-non-serializable-data
-      serializableCheck: false,
+      serializableCheck: false, // Disables serializable value checks
     }),
 });

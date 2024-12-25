@@ -1,11 +1,11 @@
 import PropTypes from "prop-types";
 import Error from "./Error";
 
-const FormRow = ({ children, label, error }) => {
+const FormRow = ({ children, label, error, isHidden = true }) => {
   // console.log(children.props);
 
   return (
-    <div className="form-row">
+    <div className={isHidden ? "form-row" : "hidden"}>
       {label && (
         <label className="form-row__label" htmlFor={children.props.id}>
           {label}

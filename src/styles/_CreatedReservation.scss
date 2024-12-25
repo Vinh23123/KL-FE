@@ -1,0 +1,35 @@
+@import "colors.scss";
+
+.reservation {
+  &__input {
+    padding: 1rem;
+    color: white;
+    font-size: 20px;
+    border: none;
+    outline: none;
+    background-color: $border-base;
+  }
+
+  // discount
+
+  .__discount-option {
+    display: flex;
+    gap: 1rem;
+  }
+
+  &__btn {
+    padding: 8px 12px;
+    color: white;
+    font-size: 20px;
+    border: none;
+    outline: none;
+    background-color: $button-background-base;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    float: right;
+
+    &:hover {
+      background-color: $button-background-hover;
+    }
+  }
+}

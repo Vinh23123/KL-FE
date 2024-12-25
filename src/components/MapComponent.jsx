@@ -15,6 +15,7 @@ const MapComponent = ({ width = "100%", height = "900px", position }) => {
     latitude: 37.78,
     zoom: 14,
   });
+  console.log("Position", position);
 
   useEffect(() => {
     if (position?.longitude && position?.latitude) {
@@ -27,32 +28,32 @@ const MapComponent = ({ width = "100%", height = "900px", position }) => {
     }
   }, [position?.longitude, position?.latitude]); // Only re-run when `position` changes
 
-  useEffect(() => {
-    const convertLocationToAddress = async (latitude, longitude) => {
-      try {
-        setIsLoading(true);
-        const response = await apiClient.post(`/locations/convert-location`, {
-          latitude: latitude,
-          longitude: longitude,
-        });
-        // console.log(
-        //   "Data location convert: ",
-        //   JSON.stringify(response.data.data, null, 2)
-        // );
-        setAddress(response.data.data);
-        setIsLoading(false);
-      } catch (error) {
-        setError(error);
-        setIsLoading(false);
-        console.error(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    if (position?.longitude && position?.latitude) {
-      convertLocationToAddress(position?.latitude, position?.longitude);
-    }
-  }, [position?.longitude, position?.latitude]);
+  // useEffect(() => {
+  //   const convertLocationToAddress = async (latitude, longitude) => {
+  //     try {
+  //       setIsLoading(true);
+  //       const response = await apiClient.post(`/locations/convert-location`, {
+  //         latitude: latitude,
+  //         longitude: longitude,
+  //       });
+  //       // console.log(
+  //       //   "Data location convert: ",
+  //       //   JSON.stringify(response.data.data, null, 2)
+  //       // );
+  //       setAddress(response.data.data);
+  //       setIsLoading(false);
+  //     } catch (error) {
+  //       setError(error);
+  //       setIsLoading(false);
+  //       console.error(error);
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   };
+  //   if (position?.longitude && position?.latitude) {
+  //     convertLocationToAddress(position?.latitude, position?.longitude);
+  //   }
+  // }, [position?.longitude, position?.latitude]);
 
   // console.log("Location", position);
 
@@ -75,7 +76,7 @@ const MapComponent = ({ width = "100%", height = "900px", position }) => {
           onClose={() => togglePopup(false)}
           anchor="top"
         >
-          <div>{address.formattedAddress}</div>
+          <div>{position?.formattedAddress}</div>
         </Popup>
       )}
     </ReactMapGL>

@@ -24,6 +24,13 @@
 
     margin-top: 20rem;
   }
+
+  &__grid-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 0.5rem;
+  }
 }
 
 ul {

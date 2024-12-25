@@ -24,6 +24,14 @@
     outline: none;
   }
 
+  /// button
+  ///
+  &__btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   &__search-button {
     cursor: pointer;
     border-radius: 50%;
