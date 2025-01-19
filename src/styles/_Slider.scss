@@ -6,10 +6,12 @@
 
   gap: 1rem;
   margin: 2rem;
-  padding: 4rem;
+  // padding: 4rem;
   box-shadow: 0 0.6rem 1.5rem rgba(0, 0, 0, 0.118);
-  &__infor {
-    // background-color: red;
+
+  &__infor-container {
+    background-color: #f1f3f5;
+    padding: 4rem;
   }
 
   &__hotel-name {
@@ -24,6 +26,14 @@
     padding: 0.5rem;
     border-radius: 5%;
     background-color: $room-status-color;
+  }
+
+  &__room-hiring {
+    display: block;
+    // width: 5rem;
+    padding: 0.5rem;
+    border-radius: 5%;
+    background-color: $background-color-google;
   }
 
   &__room-unavailable {
@@ -73,14 +83,15 @@
   }
 }
 .slider {
-  max-width: 50rem;
+  // max-width: 50rem;
   height: 40rem;
   margin: 0 auto;
+  padding: 1rem;
 
   position: relative;
 
-  min-width: 30rem; /* New: Ensures a minimum width */
-  min-height: 30rem; /* New: Ensures a minimum height */
+  min-width: 30rem;
+  min-height: 30rem;
 
   overflow: hidden;
 }
@@ -198,28 +209,80 @@
     padding: 1rem;
   }
 
-  &__rating {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+  .room-users {
+    &__rating {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
 
-    margin-top: 1rem;
-  }
+    &__review-card {
+      width: 100%; // Keeps full-width cards
+      height: 150px; // Preserve your provided height
+      background-color: #f9f9f9; // Light background
+      border: 1px solid #ddd; // Subtle border
+      border-radius: 8px; // Rounded corners
+      padding: 1rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); // Subtle shadow
+      display: flex; // Flex layout for better alignment
+      flex-direction: column; // Vertical stacking
+      justify-content: space-between; // Align content
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
 
-  &__description {
-    background-color: $background-color-rooms;
-    padding: 2rem;
-    h3 {
-      margin-bottom: 8px;
+      &:hover {
+        transform: translateY(-5px); // Lift effect on hover
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); // Enhanced shadow
+      }
+    }
+
+    &__description {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      .room-users__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .room-users__username {
+          font-weight: 700;
+          font-size: 1rem;
+          color: #007bff; // Primary color
+        }
+      }
+
+      p {
+        margin: 0;
+        font-size: 0.875rem;
+      }
+
+      .room-users__date {
+        font-size: 0.75rem; // Smaller font size for the date
+        color: #777; // Muted color for secondary info
+      }
+    }
+
+    &__no-reviews {
+      font-size: 1rem;
+      color: #999;
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    .comments-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #222; // Darker text for the title
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
     }
   }
 
   &__right-items {
     flex: 50%;
-  }
-
-  &__date {
-    font-size: 10px;
   }
 
   &__img-user {
@@ -232,10 +295,7 @@
   &__form-review {
     position: relative;
     display: inline-block;
-
-    & textarea {
-      padding-right: 20rem;
-    }
+    width: 100%;
 
     & button {
       position: absolute;
@@ -249,7 +309,15 @@
   }
 
   &__input {
-    padding: 12px 70px;
+    width: 100%;
+    height: 100px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    resize: none;
   }
 
   &__form-btn {
@@ -286,6 +354,91 @@
     &__left-items,
     &__right-items {
       flex: 100%;
+    }
+  }
+}
+
+// rating
+.rating-form-container {
+  // Form Container
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f9f9f9; // Light gray background
+    border: 1px solid #ddd; // Subtle border
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); // Subtle shadow
+    max-width: 400px;
+    margin: 20px auto;
+
+    h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #333; // Dark text color
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .star-rating {
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+
+      span {
+        font-size: 24px; // Adjust size for stars
+        cursor: pointer;
+        color: #ffbf00; // Gold for stars
+        transition: transform 0.2s;
+
+        &:hover {
+          transform: scale(1.2); // Slight zoom effect on hover
+        }
+
+        &.active {
+          color: #ffbf00; // Gold for active stars
+        }
+      }
+    }
+
+    .submit-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: #fff;
+      background-color: #007bff; // Default: Blue
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+      &:hover {
+        background-color: #0056b3; // Darker blue on hover
+        transform: translateY(-2px); // Slight lift effect
+      }
+
+      &:active {
+        background-color: #003f7f; // Even darker blue when active
+        transform: translateY(0); // Reset lift effect
+      }
+
+      &:first-of-type {
+        background-color: #f44336; // Red for "No"
+
+        &:hover {
+          background-color: #d32f2f; // Darker red on hover
+        }
+
+        &:active {
+          background-color: #b71c1c; // Even darker red when active
+        }
+      }
     }
   }
 }

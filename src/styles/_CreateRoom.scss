@@ -55,19 +55,20 @@
   &__form-input--padding {
     padding: 1rem;
   }
+
+  // images
   &__img-reveiw-container {
-    width: 80%;
-    // height: 300px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    width: 50%;
+    height: auto;
     padding: 1rem;
-    // background-color: red;
-    border-top: 10px solid grey;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
   }
+
   &__img {
-    width: 250px;
-    height: 250px;
-    margin: 0.5rem;
+    width: 130px;
+    height: 100%;
+    border: 5px solid white;
   }
   &__img-review {
     width: 100%;
@@ -84,6 +85,8 @@
     font-weight: bolder;
   }
 
+  // button
+
   &__btn {
     font-size: 18px;
     padding: 12px 18px;
@@ -99,5 +102,11 @@
   &__btn:hover {
     background-color: $button-background-hover;
     transform: scale(1.2);
+  }
+
+  // message
+  &__status-failed {
+    color: red;
+    text-align: center;
   }
 }

@@ -1,27 +1,18 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import FormRow from "../../components/FormRow";
 import { useForm } from "react-hook-form";
 import SearchForm from "../../components/SearchForm";
-import Map from "../../components/Map";
 import Spinner from "../../components/Spinner";
 import { VALIDATOR as pattern } from "../../constant/PatternValidate";
-import MapComponent from "../../components/MapComponent";
-import apiClient from "../../services/apiClient";
-import { use } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { updateHotel } from "../../redux/slice/hotelSlice";
 
 const SettingForm = ({ hotel = {} }) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [isShowSpinner, setIsShowSpinner] = useState(false);
   const dispatch = useDispatch();
-  // const {
-  //   // data: hotel : hotelResponse,
-  //   isLoading,
-  //   isError,
-  // } = useSelector((state) => state.hotel);
+
   const isEditSession = Boolean(hotel?.hotelId);
-  console.log(hotel);
 
   const {
     register,
@@ -141,13 +132,22 @@ const SettingForm = ({ hotel = {} }) => {
           {...register("description")}
         />
       </FormRow>
-      <button
-        disabled={isSubmitting}
-        className="create-room__btn"
-        type="submit"
-      >
-        Submit
-      </button>
+      <div className="search-form__btn-container">
+        <button
+          disabled={isSubmitting}
+          className="create-room__btn"
+          type="submit"
+        >
+          Submit
+        </button>
+        <button
+          onClick={handleNextPage}
+          className="create-room__btn"
+          type="button"
+        >
+          Next
+        </button>
+      </div>
     </form>
   );
 
@@ -155,7 +155,7 @@ const SettingForm = ({ hotel = {} }) => {
     <>
       <SearchForm
         onStepChange={handlePrePage}
-        locationId={hotel.location.locationId}
+        locationId={hotel?.location?.locationId}
       />
     </>
   );

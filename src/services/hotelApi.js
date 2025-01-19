@@ -21,3 +21,13 @@ export const updateCurrentHotel = (data) => {
     description: data.description,
   });
 };
+
+export const createCurrentHotel = (data) => {
+  console.log(data);
+  return apiClient.post(`/hotels`, {
+    hotelName: data.hotelName,
+    phoneNumber: data.phone,
+    email: data.email,
+    description: data.description,
+  });
+};

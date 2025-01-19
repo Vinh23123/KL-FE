@@ -94,7 +94,7 @@ const SearchForm = ({ width = 400, onStepChange, locationId }) => {
     }
   }, [searchResults]);
 
-  if (isLoadingState) return <Spinner />;
+  // if (isLoadingState) return <Spinner />;
 
   return (
     <>

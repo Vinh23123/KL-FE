@@ -80,6 +80,10 @@ const ReservationRoom = ({
       openInNewTab(paymentResponse?.data?.paymentUrl);
     }
   }, [paymentResponse?.data?.paymentUrl]);
+  const renderPaymentStatus = (res) => {
+    const { paymentStatus } = res;
+    return paymentStatus;
+  };
 
   return (
     <>
@@ -103,19 +107,19 @@ const ReservationRoom = ({
                     <p>Room Number: {room.roomNumber}</p>
                     <span
                       className={`reservation-room__status ${
-                        res.reservationType === "CONFIRMED"
+                        res?.payment?.paymentStatus === "COMPLETE"
                           ? "reservation-room__status--confirmed"
                           : "reservation-room__status--pending"
                       }`}
                     >
-                      {res.reservationType}
+                      {res?.payment?.paymentStatus}
                     </span>
                   </div>
                   <p className="mb-1">Check-In: {formatDate(res.checkIn)}</p>
                   <p className="mb-1">Check-Out: {formatDate(res.checkOut)}</p>
                   <p>Total Price: {formatCurrency(res.totalAmount)}</p>
                 </div>
-                {res.reservationType !== "CONFIRMED" ? (
+                {res.payment?.paymentStatus !== "COMPLETE" ? (
                   <div className="reservation-room__action">
                     <button
                       type="button"
@@ -124,13 +128,13 @@ const ReservationRoom = ({
                     >
                       ...
                     </button>
-                    <button
+                    {/* <button
                       type="button"
                       onClick={handleDeleteReservation}
                       className="reservation-room__btn  reservation-room__btn--delete"
                     >
                       🗑️
-                    </button>
+                    </button> */}
                     <button
                       type="button"
                       onClick={() => handlePayment(res?.reservationId)}

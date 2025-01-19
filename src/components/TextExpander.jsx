@@ -15,15 +15,22 @@ const TextExpander = ({
     setIsExpanded((show) => !show);
   };
 
-  const shortText =
-    String(children).split(" ").slice(0, collapsedNumWords).join(" ") + "...";
+  // Only proceed if children has content
+  if (!children || typeof children !== "string" || children.trim() === "") {
+    return null; // Do not render the component
+  }
 
-  const displayText = isExpanded ? String(children) : shortText;
+  const shortText =
+    children.split(" ").slice(0, collapsedNumWords).join(" ") +
+    (children.split(" ").length > collapsedNumWords ? "..." : "");
+
+  const displayText = isExpanded ? children : shortText;
+
   return (
     <div className="text-expander-div">
       <span>{displayText}</span>
-      {/* logic is if the number of words is greater than collapedNumber -> display button*/}
-      {String(children).split(" ").length > collapsedNumWords && (
+      {/* Display the button only if the text exceeds collapsedNumWords */}
+      {children.split(" ").length > collapsedNumWords && (
         <button className="text-expander-div__btn" onClick={handleDisplayText}>
           {isExpanded ? messageShowLess : messageShowMore}
         </button>

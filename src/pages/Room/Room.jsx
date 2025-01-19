@@ -8,7 +8,7 @@ const Room = ({ room = {} }) => {
   const navigate = useNavigate();
 
   const handleClickDetail = (id) => {
-    console.log(room.roomId);
+    // console.log(room.roomId);
     navigate(`/rooms/${id}`);
   };
 

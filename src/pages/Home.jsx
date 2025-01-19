@@ -7,8 +7,10 @@ const Home = () => {
   return (
     <>
       <section className="section-home">
+        <div className="section-home__bg-image"></div>
         <div className="section-home__description">
-          <h1 className="feature-tilte">Enjoy the journey with us</h1>
+          <h1>Introduction</h1>
+          <h3 className="feature-tilte">Enjoy the journey with us</h3>
           <p className="section-home__content">
             Embark on a journey where every moment is an adventure waiting to be
             discovered. Beyond the destination, it's the small joys—the
@@ -18,30 +20,6 @@ const Home = () => {
             the beauty of travel. After all, the best memories are made when you
             slow down and enjoy the ride.
           </p>
-        </div>
-        <div className="section-home__container">
-          <div className="section-home__img-gallary">
-            <img
-              src="/src/assets/room_image/nature.jpg"
-              alt="Computer"
-              className="section-home__img"
-            />
-            <img
-              src="/src/assets/room_image/nature.jpg"
-              alt="Computer"
-              className="section-home__img"
-            />
-            <img
-              src="/src/assets/room_image/nature.jpg"
-              alt="Computer"
-              className="section-home__img"
-            />
-            <img
-              src="/src/assets/room_image/nature.jpg"
-              alt="Computer"
-              className="section-home__img"
-            />
-          </div>
         </div>
       </section>
 

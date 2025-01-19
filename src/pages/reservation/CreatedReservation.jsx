@@ -6,6 +6,7 @@ import apiClient from "../../services/apiClient";
 import { toLocalDateTime } from "../../helpers/toLocalDateTime";
 
 import "../../styles/_CreatedReservation.scss";
+import { toast } from "react-toastify";
 
 const CreatedReservation = ({
   roomId,
@@ -58,6 +59,9 @@ const CreatedReservation = ({
       onOpenModalRes();
       onCloseModal(false);
       setIsLoading(false);
+      toast.success(
+        "Room is successfully reserved. You need to pay in 1 day. Or Hotel Admin will delete your reservation"
+      );
       reset();
     } catch (error) {
       setError(error);
@@ -118,6 +122,7 @@ const CreatedReservation = ({
             <select
               id="discount"
               name="discount"
+              className="reservation__input"
               {...register("discount", {
                 required: "This field is required",
               })}

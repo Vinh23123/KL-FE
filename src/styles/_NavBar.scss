@@ -9,7 +9,7 @@
 
   &__grid-container {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 10px;
   }
 
@@ -30,6 +30,15 @@
     flex-direction: row;
     justify-content: center;
     gap: 0.5rem;
+  }
+  &__btn-logout {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: $background-color-google;
+  }
+  &__btn-logout:hover {
+    color: $background-color-google-hover;
   }
 }
 

@@ -18,8 +18,11 @@
 
   // side-bar logo container
   &__logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     img {
-      width: 90%;
+      width: 50%;
     }
   }
 

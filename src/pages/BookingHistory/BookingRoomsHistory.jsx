@@ -24,7 +24,13 @@ const BookingRoomsHistory = () => {
         //   "Reservation Response Data: ",
         //   JSON.stringify(response.data.data, null, 2)
         // );
-        setReservationRoom(response.data.data);
+
+        const reservations = response.data.data;
+
+        // Reverse the order of reservations
+        const reversedReservations = reservations.reverse();
+
+        setReservationRoom(reversedReservations);
         setIsLoading(false);
       } catch (error) {
         setError(error);

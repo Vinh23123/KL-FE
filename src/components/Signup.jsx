@@ -3,8 +3,15 @@ import { Link, useNavigate } from "react-router-dom";
 
 import "../styles/_Signup.scss";
 import { VALIDATOR as pattern } from "../constant/PatternValidate";
+import { useEffect, useState } from "react";
+import Spinner from "./Spinner";
+import apiClient from "../services/apiClient";
+import { toast } from "react-toastify";
 
 const Signup = () => {
+  const [isLoadingRegister, setIsLoadingRegister] = useState(false);
+  const [registerResponse, setRegisterResponse] = useState({});
+  const [error, setError] = useState();
   const {
     register,
     handleSubmit,
@@ -16,35 +23,95 @@ const Signup = () => {
       firstName: "",
       lastName: "",
       userName: "",
+      email: "",
       phone: "",
-      address: "",
       password: "",
     },
   });
+  useEffect(() => {
+    if (error) {
+      console.log("Error: ", error.message);
+
+      toast.error(error?.message);
+    }
+  }, [error]);
   const navigate = useNavigate();
   const onSubmit = async (data) => {
     // Simulate an async submission process
     // will repalce by api
+    console.log(data);
+    try {
+      setIsLoadingRegister(true);
+      const roomsRespone = await apiClient.post(`auth/signup`, {
+        userName: data.userName,
+        email: data.email,
+        password: data.password,
+        role: ["user"],
+      });
+      console.log(
+        "RoomsRespone Data: ",
+        JSON.stringify(roomsRespone.data?.data?.pageNo, null, 2)
+      );
+      setRegisterResponse(roomsRespone.data?.data);
+      toast.success("Register Successfully");
+      setIsLoadingRegister(false);
+      navigate("/booking-app/login");
+    } catch (error) {
+      setError(error);
+      console.log(error);
+    } finally {
+      setIsLoadingRegister(false);
+    }
+  };
 
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    navigate("/login");
-    reset();
-    console.log("Form submitted:", data);
-  };
-  const onErrors = (errors) => {
-    console.log("Failed validation!", errors);
-  };
+  if (isLoadingRegister) return <Spinner />;
 
   return (
     <div className="signup">
       <div className="signup__flex-item-left">
         <Form
           className="signup__flex-item-left__form"
-          onSubmit={handleSubmit(onSubmit, onErrors)}
+          onSubmit={handleSubmit(onSubmit)}
           control={control}
         >
           <p>Start your journey with us</p>
           <h3>Sign Up To Our Service</h3>
+          <div className="signup__flex-item-left__group-items">
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              className="signup__flex-item-left__input"
+              {...register("firstName")}
+              //ARIA (Accessible Rich Internet Applications)
+              aria-invalid={errors.firstName ? "true" : "false"}
+              placeholder="First Name"
+            />
+
+            {errors && (
+              <span className="signup__flex-item-left__errors">
+                {errors.firstName?.message}
+              </span>
+            )}
+          </div>
+          <div className="signup__flex-item-left__group-items">
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              className="signup__flex-item-left__input"
+              {...register("lastName")}
+              //ARIA (Accessible Rich Internet Applications)
+              aria-invalid={errors.lastName ? "true" : "false"}
+              placeholder="Last Name"
+            />
+
+            {errors && (
+              <span className="signup__flex-item-left__errors">
+                {errors.lastName?.message}
+              </span>
+            )}
+          </div>
           <div className="signup__flex-item-left__group-items">
             <input
               type="text"
@@ -139,7 +206,8 @@ const Signup = () => {
                   // Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character
                   // example pass: Password1@
                   value: pattern.password,
-                  message: "Password is not valid",
+                  message:
+                    "Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character",
                 },
               })}
               aria-invalid={errors.password ? "true" : "false"}
@@ -157,11 +225,10 @@ const Signup = () => {
             {isSubmitting ? "Signing up ..." : "Sign up"}
           </button>
           <p>
-            Have an account? <Link to="/login">Sign In</Link>
+            Have an account? <Link to="/booking-app/login">Sign In</Link>
           </p>
         </Form>
       </div>
-      <div className="signup__flex-item-right"></div>
     </div>
   );
 };

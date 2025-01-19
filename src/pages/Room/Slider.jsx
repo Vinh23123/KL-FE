@@ -14,6 +14,7 @@ import { formatCurrency, formatReviewDate } from "../../helpers/formatCurrency";
 import CreatedReservation from "../reservation/CreatedReservation";
 import FormRow from "../../components/FormRow";
 import { useForm } from "react-hook-form";
+import FormSubmitComment from "./FormSubmitComment";
 
 const initialReviewList = 4;
 const incrementInitialReviewList = 5;
@@ -36,6 +37,7 @@ const Slider = () => {
   const [statusReservation, setStatusReservation] = useState({});
   const [isOpenRes, setIsOpenRes] = useState(false);
   const [discounts, setDiscounts] = useState([]);
+  const [formSubmitRating, setFormSubmitRating] = useState({});
   const navigate = useNavigate();
   const {
     register,
@@ -45,9 +47,7 @@ const Slider = () => {
     formState: { errors, isSubmitting },
   } = useForm({
     defaultValues: {
-      rating: 0,
-      title: "Test 456",
-      comment: "",
+      rating: 3,
     },
   });
   const messageArr = ["Terriable", "Bad", "Okay", "Good", "Amazing"];
@@ -91,13 +91,13 @@ const Slider = () => {
       }
     };
     if (
-      reviewResponse === "SUCCESS" ||
-      statusReservation?.status === "SUCCESS"
+      statusReservation?.status === "SUCCESS" ||
+      formSubmitRating?.status === "SUCCESS"
     ) {
       fetchRoomById();
     }
     fetchRoomById();
-  }, [roomId, reviewResponse, statusReservation]);
+  }, [roomId, statusReservation, formSubmitRating]);
 
   useEffect(() => {
     const fetchAllDiscounts = async () => {
@@ -118,10 +118,22 @@ const Slider = () => {
         setIsLoading(false);
       }
     };
-    if (isOpen) {
-      fetchAllDiscounts();
+    // if (isOpen) {
+    fetchAllDiscounts();
+    // }
+  }, []);
+
+  // Fetch reviews and sort by date
+  useEffect(() => {
+    if (room?.reviews) {
+      const sortedReviews = [...room.reviews].sort((a, b) => {
+        const dateA = new Date(a.reviewDate);
+        const dateB = new Date(b.reviewDate);
+        return dateB - dateA; // Newest first
+      });
+      setReviews(sortedReviews);
     }
-  }, [isOpen]);
+  }, [room?.reviews]);
 
   const handleOpenModal = () => {
     setIsOpen(true);
@@ -137,41 +149,50 @@ const Slider = () => {
     navigate("/booking-history");
   };
 
-  const handleOpenModalRating = () => {
-    setIsOpenRating(true);
-  };
-
-  const handleOpenModalRes = () => {
-    setIsOpenRes(true);
-  };
-
-  const loadMore = () => {
-    setDisplayReviews(displayReviews + incrementInitialReviewList);
-  };
-
-  const handleSubmitFormReview = async (data) => {
+  // First Phase: Handle Comment Submission
+  const handleOpenModalRating = async (data) => {
     try {
       setIsLoading(true);
       const response = await apiClient.post(`/rooms/${roomId}/reviews`, {
-        rating: data.rating,
-        title: "Test 124",
-        comment: data.comment,
+        comment: data.comment, // Pass the user comment
       });
-      // console.log(
-      //   "Review Response Data: ",
-      //   JSON.stringify(response.data, null, 2)
-      // );
-      setReviewResponse(response.data.status);
-      setIsOpenRating(false);
-      setIsLoading(false);
-      reset();
+
+      setReviewResponse(response.data.data); // Save the review response
+      setIsOpenRating(true); // Open the rating modal
+      reset(); // Reset the comment form
     } catch (error) {
-      setError(error);
-      setIsLoading(false);
-      console.error(error);
+      console.error("Error submitting comment:", error);
     } finally {
       setIsLoading(false);
     }
+  };
+  // Second Phase: Handle Rating Submission
+  const handleSubmitFormReview = async (data) => {
+    try {
+      setIsLoading(true);
+
+      if (!reviewResponse || !reviewResponse.reviewId) {
+        console.error("No review to update rating for");
+        return;
+      }
+
+      const res = await apiClient.put(`/reviews/rating`, {
+        reviewId: reviewResponse.reviewId, // Use the review ID from the first phase
+        rating: data.rating, // Use the rating from the StarRating component
+      });
+      setFormSubmitRating(res.data);
+      setIsOpenRating(false); // Close the rating modal
+      reset(); // Reset the rating form
+    } catch (error) {
+      console.error("Error submitting rating:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Ask User Confirmation
+  const handleRatingDecision = () => {
+    setIsOpenRating(false);
   };
 
   if (isLoading) return <Spinner />;
@@ -187,6 +208,22 @@ const Slider = () => {
     ));
   };
 
+  const renderStatus = () => {
+    return room?.status === "UNAVAILABLE"
+      ? "room-details__room-unavailable"
+      : room?.status === "HIRING"
+      ? "room-details__room-hiring"
+      : "room-details__room-available";
+  };
+
+  const loadMore = () => {
+    setDisplayReviews(displayReviews + incrementInitialReviewList);
+  };
+
+  const handleOpenModalRes = () => {
+    setIsOpenRes(true);
+  };
+
   const goToSlide = (slideIndex) => {
     setCurSlide(slideIndex);
   };
@@ -197,13 +234,13 @@ const Slider = () => {
 
   return (
     <>
-      {isOpenRes ? (
+      {/* {isOpenRes ? (
         <Modal onCloseModal={handleCloseModalRes}>
           {statusReservation?.status}
         </Modal>
       ) : (
         <></>
-      )}
+      )} */}
       {isOpen ? (
         <Modal onCloseModal={handleCloseModal}>
           <CreatedReservation
@@ -217,24 +254,36 @@ const Slider = () => {
       ) : (
         <> </>
       )}
-      {isOpenRating ? (
-        <Modal onCloseModal={handleCloseModal}>
-          <form onSubmit={handleSubmit(handleSubmitFormReview)}>
-            <StarRating
-              maxRating={5}
-              defaultRating={3}
-              messages={messageArr}
-              size={28}
-              onSetRating={(rating) => setValue("rating", rating)}
-              isEdit={true}
-            />
-            <button type="submit">Submit</button>
-          </form>
-        </Modal>
-      ) : (
-        <> </>
-      )}
 
+      {isOpenRating && (
+        <Modal onCloseModal={handleCloseModal}>
+          <div className="rating-form-container">
+            <h3>Please provide your rating:</h3>
+            <form onSubmit={handleSubmit(handleSubmitFormReview)}>
+              <div className="star-rating">
+                <StarRating
+                  maxRating={5}
+                  defaultRating={3}
+                  messages={["Poor", "Fair", "Good", "Very Good", "Excellent"]}
+                  size={28}
+                  onSetRating={(rating) => setValue("rating", rating)}
+                  isEdit={true}
+                />
+              </div>
+              <button
+                type="button"
+                className="submit-btn"
+                onClick={() => handleRatingDecision("no")}
+              >
+                No
+              </button>
+              <button type="submit" className="submit-btn">
+                Yes
+              </button>
+            </form>
+          </div>
+        </Modal>
+      )}
       <div className="room-details">
         <div className="slider">
           <div className="slides">
@@ -247,7 +296,7 @@ const Slider = () => {
           </div>
         </div>
 
-        <div>
+        <div className="room-details__infor-container">
           <span className="room-details__hotel-name">
             {room?.hotel?.hotelName}
           </span>
@@ -256,15 +305,7 @@ const Slider = () => {
               Room Number:
               <span>{` ${room?.roomNumber}`}</span>
             </p>
-            <span
-              className={
-                room?.status === "UNAVAILABLE"
-                  ? "room-details__room-unavailable"
-                  : "room-details__room-available"
-              }
-            >
-              {room?.status}
-            </span>
+            <span className={renderStatus()}>{room?.status}</span>
           </div>
           <div className="room-details__flex">
             <p>Capacity {room?.capacity}</p>
@@ -292,71 +333,60 @@ const Slider = () => {
         </div>
       </div>
       <div className="room-hotel">
-        <h3> {room?.hotel?.hotelName}</h3>
-        <p>{room?.hotel?.description}</p>
+        {/* <h3> {room?.hotel?.hotelName}</h3>
+        <p>{room?.hotel?.description}</p> */}
       </div>
 
       <div className="room-users">
         <div className="room-users__left-items">
           <div className="room-users__form-review">
-            <textarea
-              type="text"
-              className="room-users__input"
-              placeholder="Your comment"
-              {...register("comment", {
-                required: "This fied is required",
-                maxLength: {
-                  value: 1200,
-                  message: "Comment should be max at 1200 characters",
-                },
-              })}
-            />
-            {errors.comment && (
-              <span className="signup__flex-item-left__errors">
-                {errors.comment?.message}
-              </span>
-            )}
-            <button
-              onClick={handleOpenModalRating}
-              className="room-users__form-btn"
-            >
-              <PaperPlaneTilt size={24} />
-            </button>
+            <FormSubmitComment handleOpenModalRating={handleOpenModalRating} />
           </div>
-          <h2>Comments</h2>
           <>
-            {reviews?.length ? (
-              <div className="room-users__rating">
-                {reviews.slice(0, displayReviews).map((review) => (
-                  <div key={review.reviewId}>
-                    <div className="room-users__description">
-                      <p hidden>{review?.user?.userId}</p>
-                      <span>
-                        {`${review?.user?.firstName} ${review?.user?.lastName}`}
-                      </span>
-                      <StarRating
-                        maxRating={5}
-                        defaultRating={review.rating}
-                        messages={messageArr}
-                        size={28}
-                        isEdit={false}
-                      />
-                      <h3>{review.title}</h3>
-                      <TextExpander collapsedNumWords={10} isShow={false}>
-                        {review?.comment}
-                      </TextExpander>
-                      <p>
-                        <span className="room-users__date">
+            <h2 className="comments-title">Comments</h2>
+            <div className="room-users__rating">
+              {reviews?.length ? (
+                reviews
+                  .slice(0, displayReviews)
+                  .filter((review) => review.comment || review.rating)
+                  .map((review) => (
+                    <div
+                      key={review.reviewId}
+                      className="room-users__review-card"
+                    >
+                      <div className="room-users__description">
+                        <div className="room-users__header">
+                          <span className="room-users__username">
+                            {review?.user?.username}
+                          </span>
+                          {review.rating ? (
+                            <StarRating
+                              maxRating={5}
+                              defaultRating={review.rating}
+                              messages={messageArr}
+                              size={20}
+                              isEdit={false}
+                            />
+                          ) : (
+                            <></>
+                          )}
+                        </div>
+                        <TextExpander collapsedNumWords={10} isShow={false}>
+                          {review?.comment}
+                        </TextExpander>
+
+                        <p className="room-users__date">
                           {formatReviewDate(review.reviewDate)}
-                        </span>
-                      </p>
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <p> Room has no review, yet</p>
-            )}
+                  ))
+              ) : (
+                <p className="room-users__no-reviews">
+                  Room has no reviews yet.
+                </p>
+              )}
+            </div>
             {/* 6 reviews > 5 -> 1 -> <></> */}
             {reviews.length > displayReviews ? (
               <div className="room-users__btn-load-more-container">
