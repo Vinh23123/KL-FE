@@ -375,19 +375,20 @@ const RoomsDashboard = () => {
                     <span
                       className={
                         room.reservationList[room.reservationList.length - 1]
-                          ?.payment.paymentStatus === "COMPLETE"
+                          ?.payment?.paymentStatus === "COMPLETE"
                           ? "rooms-dashboard__payment-complete"
                           : room.reservationList[
                               room.reservationList.length - 1
-                            ]?.payment.paymentStatus === "FAILED"
+                            ]?.payment?.paymentStatus === "FAILED"
                           ? "rooms-dashboard__payment-failed"
                           : "rooms-dashboard__payment-pending"
                       }
                     >
-                      {
-                        room.reservationList[room.reservationList.length - 1]
-                          ?.payment.paymentStatus
-                      }
+                      {room?.reservationList[room.reservationList.length - 1]
+                        ?.payment
+                        ? room?.reservationList[room.reservationList.length - 1]
+                            ?.payment?.paymentStatus
+                        : "PENDING"}
                     </span>
                   ) : (
                     <></>

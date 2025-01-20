@@ -39,7 +39,7 @@ const UpdateReservationForm = ({
     try {
       setIsLoading(true);
       const response = await apiClient.put(
-        `/reservations/rooms/${roomId}/discounts/1`,
+        `/reservations/rooms/${roomId}/discounts/4`,
         {
           reservationId: reservationIdToUpdate,
           checkIn: toLocalDateTime(checkInDate),
